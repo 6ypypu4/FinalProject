@@ -1,0 +1,8 @@
+welcome=Welcome!
+select_language=Select language:
+select_user_type=Select user type:
+admin=Admin
+regular_user=Regular User
+login=Enter your login:
+password=Enter your password:
+authentication_failed=Authentication failed!

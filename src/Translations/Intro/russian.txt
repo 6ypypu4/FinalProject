@@ -1,0 +1,8 @@
+welcome=Добро пожаловать!
+select_language=Выберите язык:
+select_user_type=Выберите тип пользователя:
+admin=Администратор
+regular_user=Обычный пользователь
+login=Введите ваш логин:
+password=Введите ваш пароль:
+authentication_failed=Ошибка авторизации!

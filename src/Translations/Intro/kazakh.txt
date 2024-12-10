@@ -1,0 +1,8 @@
+welcome=Қош келдіңіз!
+select_language=Тілді таңдаңыз:
+select_user_type=Пайдаланушы түрін таңдаңыз:
+admin=Әкімші
+regular_user=Қарапайым пайдаланушы
+login=Логинді енгізіңіз:
+password=Құпия сөзді енгізіңіз:
+authentication_failed=Авторизация сәтсіз!
