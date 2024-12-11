@@ -1,8 +1,9 @@
-welcome=Welcome!
-select_language=Select language:
-select_user_type=Select user type:
+select_user_type=Please select your user type:
 admin=Admin
-regular_user=Regular User
-login=Enter your login:
+manager=Manager
+teacher=Teacher
+student=Student
+finance_manager=Finance Manager
+login=Enter your login ID:
 password=Enter your password:
-authentication_failed=Authentication failed!
+authentication_failed=Authentication failed. Please try again.

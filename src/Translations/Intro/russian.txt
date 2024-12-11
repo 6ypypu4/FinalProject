@@ -1,8 +1,9 @@
-welcome=Добро пожаловать!
-select_language=Выберите язык:
-select_user_type=Выберите тип пользователя:
+select_user_type=Пожалуйста, выберите тип пользователя:
 admin=Администратор
-regular_user=Обычный пользователь
-login=Введите ваш логин:
+manager=Менеджер
+teacher=Учитель
+student=Студент
+finance_manager=Финансовый менеджер
+login=Введите ваш ID:
 password=Введите ваш пароль:
-authentication_failed=Ошибка авторизации!
+authentication_failed=Ошибка аутентификации. Попробуйте снова.

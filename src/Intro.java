@@ -7,11 +7,23 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Intro {
+    public int id;
     private Scanner scanner = new Scanner(System.in);
     private Map<String, String> messages = new HashMap<>();
-    private Vector<User> users = new Vector<>(); // Для хранения информации о пользователях
+    private Vector<Auth> auths = new Vector<>(); // Для хранения информации о пользователях
 
     public void start() {
+        selectLanguage();
+        loadUsers("src\\Data\\authentication.txt");
+        int userType = selectUserType();
+        if (processLogin(userType)) {
+            launchView(userType, id);
+        } else {
+            System.out.println(messages.get("authentication_failed"));
+        }
+    }
+
+    private void selectLanguage() {
         System.out.println("Welcome! Please select your language:");
         System.out.println("1. English");
         System.out.println("2. Русский");
@@ -20,7 +32,6 @@ public class Intro {
         int languageChoice = scanner.nextInt();
         scanner.nextLine();
 
-        // reading translates
         if (languageChoice == 1) {
             loadMessages("src\\Translations\\Intro\\english.txt");
         } else if (languageChoice == 2) {
@@ -28,12 +39,10 @@ public class Intro {
         } else if (languageChoice == 3) {
             loadMessages("src\\Translations\\Intro\\kazakh.txt");
         }
+    }
 
-        // Загружаем пользователей из файла
-        loadUsers("users.txt");
-
+    private int selectUserType() {
         System.out.println(messages.get("select_user_type"));
-        // choose role
         System.out.println("1. " + messages.get("admin"));
         System.out.println("2. " + messages.get("manager"));
         System.out.println("3. " + messages.get("teacher"));
@@ -42,47 +51,44 @@ public class Intro {
 
         int userType = scanner.nextInt();
         scanner.nextLine();
+        return userType;
+    }
 
-        // Запрос логина и пароля
+    private boolean processLogin(int userType) {
         System.out.println(messages.get("login"));
         int loginId = scanner.nextInt();
-        scanner.nextLine();  // Пропускаем лишний символ новой строки
+        scanner.nextLine();
 
         System.out.println(messages.get("password"));
         String password = scanner.nextLine();
 
-        // Проверка логина и пароля
-        if (authenticateUser(loginId, password)) {
-            System.out.println("Login successful!");
+        return authenticateUser(userType, loginId, password);
+    }
 
-            // Показываем описание выбранной роли и запускаем соответствующую вьюшку
-            if (userType == 1) {
-                viewAdmin view = new viewAdmin();
-                view.start();
-            } else if (userType == 2) {
-                viewManager view = new viewManager();
-                view.start();
-            } else if (userType == 3) {
-                viewTeacher view = new viewTeacher();
-                view.start();
-            } else if (userType == 4) {
-                viewStudent view = new viewStudent();
-                view.start();
-            } else if (userType == 5) {
-                viewFinanceManager view = new viewFinanceManager();
-                view.start();
-            }
-        } else {
-            System.out.println(messages.get("authentication_failed"));
+    private void launchView(int userType, int id) {
+        System.out.println("Login successful!");
+        if (userType == 1) {
+            viewAdmin view = new viewAdmin(id);
+            view.start();
+        } else if (userType == 2) {
+            viewManager view = new viewManager(id);
+            view.start();
+        } else if (userType == 3) {
+            viewTeacher view = new viewTeacher(id);
+            view.start();
+        } else if (userType == 4) {
+            viewStudent view = new viewStudent(id);
+            view.start();
+        } else if (userType == 5) {
+            viewFinanceManager view = new viewFinanceManager(id);
+            view.start();
         }
     }
 
     private void loadMessages(String filename) {
-        // Загружаем переводы из файла
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Разделяем строку на ключ и значение по знаку '='
                 String[] parts = line.split("=", 2);
                 if (parts.length == 2) {
                     messages.put(parts[0], parts[1]);
@@ -94,18 +100,21 @@ public class Intro {
     }
 
     private void loadUsers(String filename) {
-        // Загружаем данные пользователей из файла
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Разделяем строку на логин, пароль и id
-                String[] parts = line.split("=", 3);  // Логин=пароль=id
+                String[] parts = line.split("=");
                 if (parts.length == 3) {
-                    String login = parts[0];
-                    String password = parts[1];
-                    int id = Integer.parseInt(parts[2]);
-                    User user = new User(id, login, password); // Создаем объект User
-                    users.add(user); // Добавляем в вектор
+                    try {
+                        int id = Integer.parseInt(parts[0].trim());
+                        int userType = Integer.parseInt(parts[1].trim());
+                        String password = parts[2].trim();
+                        auths.add(new Auth(id, userType, password));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid number format in line: " + line);
+                    }
+                } else {
+                    System.out.println("Invalid format in line: " + line);
                 }
             }
         } catch (IOException e) {
@@ -113,10 +122,10 @@ public class Intro {
         }
     }
 
-    private boolean authenticateUser(int loginId, String password) {
-        // Проверка логина и пароля
-        for (User user : users) {
-            if (user.login(loginId, password)) {
+    private boolean authenticateUser(int userType, int loginId, String password) {
+        for (Auth auth : auths) {
+            if (auth.login(userType, loginId, password)) {
+                this.id = loginId;
                 return true;
             }
         }
