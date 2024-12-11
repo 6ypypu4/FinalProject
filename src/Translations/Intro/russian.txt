@@ -7,3 +7,4 @@ finance_manager=Финансовый менеджер
 login=Введите ваш ID:
 password=Введите ваш пароль:
 authentication_failed=Ошибка аутентификации. Попробуйте снова.
+login_successful=Вход выполнен.

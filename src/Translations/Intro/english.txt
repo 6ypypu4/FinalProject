@@ -7,3 +7,4 @@ finance_manager=Finance Manager
 login=Enter your login ID:
 password=Enter your password:
 authentication_failed=Authentication failed. Please try again.
+login_successful=Login successful.

@@ -7,3 +7,4 @@ finance_manager=Қаржы менеджері
 login=Кіру ID енгізіңіз:
 password=Құпия сөзді енгізіңіз:
 authentication_failed=Аутентификация қателігі. Қайта көріңіз.
+login_successful=Кіру сәтті.

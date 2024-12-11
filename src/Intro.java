@@ -8,6 +8,8 @@ import java.util.Vector;
 
 public class Intro {
     public int id;
+    public String password;
+    public int languageChoice;
     private Scanner scanner = new Scanner(System.in);
     private Map<String, String> messages = new HashMap<>();
     private Vector<Auth> auths = new Vector<>();
@@ -18,7 +20,7 @@ public class Intro {
         loadUsers("src\\Data\\authentication.txt");
         int userType = selectUserType();
         if (processLogin(userType)) {
-            launchView(userType, id);
+            launchView(userType);
         } else {
             System.out.println(messages.get("authentication_failed"));
         }
@@ -30,7 +32,7 @@ public class Intro {
         System.out.println("2. Русский");
         System.out.println("3. Қазақша");
 
-        int languageChoice = scanner.nextInt();
+        languageChoice = scanner.nextInt();
         scanner.nextLine();
 
         if (languageChoice == 1) {
@@ -61,27 +63,27 @@ public class Intro {
         scanner.nextLine();
 
         System.out.println(messages.get("password"));
-        String password = scanner.nextLine();
+        password = scanner.nextLine();
 
         return authenticateUser(userType, loginId, password);
     }
 
-    private void launchView(int userType, int id) {
-        System.out.println("Login successful!");
+    private void launchView(int userType) {
+        System.out.println(messages.get("login_successful"));
         if (userType == 1) {
-            viewAdmin view = new viewAdmin(id);
+            viewAdmin view = new viewAdmin(id, languageChoice);
             view.start();
         } else if (userType == 2) {
-            viewManager view = new viewManager(id);
+            viewManager view = new viewManager(id, languageChoice);
             view.start();
         } else if (userType == 3) {
-            viewTeacher view = new viewTeacher(id);
+            viewTeacher view = new viewTeacher(id, languageChoice);
             view.start();
         } else if (userType == 4) {
-            viewStudent view = new viewStudent(id);
+            viewStudent view = new viewStudent(id, languageChoice);
             view.start();
         } else if (userType == 5) {
-            viewFinanceManager view = new viewFinanceManager(id);
+            viewFinanceManager view = new viewFinanceManager(id, languageChoice);
             view.start();
         }
     }
