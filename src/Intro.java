@@ -1,3 +1,5 @@
+import Translations.MessageLoader;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +12,8 @@ public class Intro {
     public int id;
     private Scanner scanner = new Scanner(System.in);
     private Map<String, String> messages = new HashMap<>();
-    private Vector<Auth> auths = new Vector<>(); // Для хранения информации о пользователях
+    private Vector<Auth> auths = new Vector<>();
+    private MessageLoader m = new MessageLoader();// Для хранения информации о пользователях
 
     public void start() {
         selectLanguage();
@@ -33,11 +36,11 @@ public class Intro {
         scanner.nextLine();
 
         if (languageChoice == 1) {
-            loadMessages("src\\Translations\\Intro\\english.txt");
+            m.loadMessages("src\\Translations\\Intro\\english.txt", messages);
         } else if (languageChoice == 2) {
-            loadMessages("src\\Translations\\Intro\\russian.txt");
+            m.loadMessages("src\\Translations\\Intro\\russian.txt", messages);
         } else if (languageChoice == 3) {
-            loadMessages("src\\Translations\\Intro\\kazakh.txt");
+            m.loadMessages("src\\Translations\\Intro\\kazakh.txt", messages);
         }
     }
 
@@ -85,19 +88,7 @@ public class Intro {
         }
     }
 
-    private void loadMessages(String filename) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("=", 2);
-                if (parts.length == 2) {
-                    messages.put(parts[0], parts[1]);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading language file: " + filename);
-        }
-    }
+
 
     private void loadUsers(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
