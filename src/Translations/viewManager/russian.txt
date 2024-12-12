@@ -1,0 +1,9 @@
+create_course=Создать курс
+exit=Выйти
+enter_choice=Введите ваш выбор
+invalid_choice=Неверный выбор
+enter_course_name=Введите название курса
+enter_course_credits=Введите количество кредитов
+enter_course_type=Введите тип курса
+course_created=Курс успешно создан
+course_creation_failed=Не удалось создать курс

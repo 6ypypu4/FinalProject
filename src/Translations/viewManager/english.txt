@@ -1,0 +1,9 @@
+create_course=Create a course
+exit=Exit
+enter_choice=Enter your choice
+invalid_choice=Invalid choice
+enter_course_name=Enter the course name
+enter_course_credits=Enter the course credits
+enter_course_type=Enter the course type
+course_created=Course successfully created
+course_creation_failed=Failed to create course

@@ -1,0 +1,9 @@
+create_course=Курсты жасау
+exit=Шығу
+enter_choice=Таңдауыңызды енгізіңіз
+invalid_choice=Қате таңдау
+enter_course_name=Курс атауын енгізіңіз
+enter_course_credits=Кредит санын енгізіңіз
+enter_course_type=Курс түрін енгізіңіз
+course_created=Курс сәтті жасалды
+course_creation_failed=Курсты жасау сәтсіз аяқталды
