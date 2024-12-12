@@ -1,4 +1,3 @@
-
 public class CourseType {
 	
 	public String typeName;

@@ -1,3 +1,4 @@
 1=1=pakita=1=5000000
 2=1=izbassar=2=0
 52=1=beatuha=1488=0
+5=3=nikita=1488=0.0

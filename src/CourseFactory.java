@@ -21,8 +21,8 @@ public class CourseFactory {
 	
 	
 	private static boolean saveToFile(String filePath, String data) {
-		try(BufferedWriter writer new BufferedWriter(new FileWriter(filePath, true))){
-			writer.writer(data);
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+			writer.write(data);
 			writer.newLine();
 			return true;
 		} catch(IOException e) {
