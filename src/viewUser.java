@@ -1,2 +1,2 @@
-public class viewUser {
+public abstract class viewUser {
 }
