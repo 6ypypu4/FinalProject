@@ -1,8 +1,8 @@
-public class CourseType {
+public class Course {
 	
 	public String typeName;
 	
-	public CourseType(String typeName) {
+	public Course(String typeName) {
 		this.typeName = typeName;
 	}
 

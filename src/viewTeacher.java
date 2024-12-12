@@ -16,7 +16,7 @@ public class viewTeacher extends viewEmployee {
         viewTeacher.languageChoice = languageChoice;
     }
 
-    private void loadMessages() {
+    protected void loadMessages() {
         if (languageChoice == 1) {
             messageLoader.loadMessages("src\\Translations\\viewTeacher\\english.txt", messages);
         } else if (languageChoice == 2) {
@@ -28,7 +28,7 @@ public class viewTeacher extends viewEmployee {
 
     public void start() {
         loadMessages();
-        createTeacherFromFile("src\\Data\\users.txt");
+        createUserFromFile("src\\Data\\users.txt");
         boolean running = true;
 
         while (running) {
@@ -52,7 +52,7 @@ public class viewTeacher extends viewEmployee {
         }
     }
 
-    private void displayInfo() {
+    protected void displayInfo() {
         System.out.println(messages.get("teacher_details") + ": " + teacher.getName() + ", " + messages.get("salary") + ": " + teacher.getSalary());
     }
 
@@ -61,7 +61,7 @@ public class viewTeacher extends viewEmployee {
         // Add logic to display teacher's schedule
     }
 
-    private void createTeacherFromFile(String filename) {
+    protected void createUserFromFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {

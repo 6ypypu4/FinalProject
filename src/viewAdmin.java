@@ -16,7 +16,7 @@ public class viewAdmin extends viewEmployee{
         viewAdmin.languageChoice = languageChoice;
     }
 
-    private void loadMessages() {
+    protected void loadMessages() {
         if (languageChoice == 1) {
             messageLoader.loadMessages("src\\Translations\\viewAdmin\\english.txt", messages);
         } else if (languageChoice == 2) {
@@ -26,9 +26,10 @@ public class viewAdmin extends viewEmployee{
         }
     }
 
+
     public void start() {
         loadMessages();
-        createAdminFromFile("src\\Data\\users.txt");
+        createUserFromFile("src\\Data\\users.txt");
         boolean running = true;
 
         while (running) {
@@ -52,7 +53,7 @@ public class viewAdmin extends viewEmployee{
         }
     }
 
-    private void displayInfo() {
+    protected void displayInfo() {
         System.out.println(messages.get("admin_details") + ": " + admin.getName() + ", " + messages.get("salary") + ": " + admin.getSalary());
     }
 
@@ -75,7 +76,8 @@ public class viewAdmin extends viewEmployee{
 
     }
 
-    private void createAdminFromFile(String filename) {
+
+    protected void createUserFromFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
