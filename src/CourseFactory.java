@@ -13,7 +13,7 @@ public class CourseFactory {
 	public boolean createCourse(String name, int credits, Vector<String> preRequisites) {
 		
 		String preReq = String.join("->", preRequisites);
-	    String courseInfo = name + '=' + credits + '=' + preReq;
+	    String courseInfo = name + '=' + credits + '=' + courseType.getTypeName() + preReq;
 		
 	    return saveToFile("src\\Data\\courses.txt", courseInfo);
 	    
