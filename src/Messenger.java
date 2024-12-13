@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Messenger {
-    private static final String MESSAGES_FILE = "messages.txt";
+    private static final String MESSAGES_FILE = "src\\Data\\messages.txt";
 
     public void sendMessage(int idTo, int idFrom, String message) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(MESSAGES_FILE, true))) {
