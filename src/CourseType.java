@@ -5,8 +5,7 @@ public class CourseType {
 	
 	public CourseType(String typeName) {
 		this.typeName = typeName;
-	}
-
+	} 
 	public String getTypeName() {
 		return typeName;
 	}

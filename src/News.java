@@ -17,6 +17,5 @@ public class News {
         setAuthor(author);
         // постит новость в news
 
-    }
-
+    } 
 }
