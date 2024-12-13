@@ -2,12 +2,14 @@ import java.util.Vector;
 
 public class Course {
 	
+	public String courseId;
 	public String typeName;
 	public String name;
 	public int credits;
 	public Vector<String> preRequisites;
 	
-	public Course(String typeName, String name, int credits, Vector<String> preRequisites) {
+	public Course(String courseId, String typeName, String name, int credits, Vector<String> preRequisites) {
+		this.courseId = courseId;
 		this.typeName = typeName;
 		this.name = name;
 		this.credits = credits;
@@ -15,6 +17,15 @@ public class Course {
 	}
 
 	
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+
+
 	public String getTypeName() {
 		return typeName;
 	}
@@ -55,6 +66,6 @@ public class Course {
 
 
 	public String toString() {
-		return "Course Type: " + typeName + " Name: " + name + " Credits: " + credits + " Pre-requisites: " + String.join(" ", preRequisites);	
+		return "Course ID: " + courseId + " Course Type: " + typeName + " Name: " + name + " Credits: " + credits + " Pre-requisites: " + String.join(" ", preRequisites);	
 		}
 }

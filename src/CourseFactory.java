@@ -4,16 +4,21 @@ import java.io.IOException;
 import java.util.Vector;
 public class CourseFactory {
 	
+	private CourseType courseType;
 	private Course course;
+	
+	public CourseFactory(CourseType courseType) {
+		this.courseType = courseType;
+	}
 	
 	public CourseFactory(Course course) {
 		this.course = course;
 	}
 	
-	public boolean createCourse(String name, int credits, Vector<String> preRequisites) {
+	public boolean createCourse(String courseId, String name, int credits, Vector<String> preRequisites) {
 		
 		String preReq = String.join("->", preRequisites);
-	    String courseInfo = name + '=' + credits + '=' + preReq;
+	    String courseInfo = courseId + '=' + name + '=' + credits + '=' + preReq;
 		
 	    return saveToFile("src\\Data\\courses.txt", courseInfo);
 	    
