@@ -19,9 +19,10 @@ public class CourseFactory {
 		
 		String preReq = String.join("->", preRequisites);
 	    String courseInfo = courseId + '=' + name + '=' + credits + '=' + preReq;
-		
-	    return saveToFile("src\\Data\\courses.txt", courseInfo);
+		return saveToFile("src\\Data\\courses.txt", courseInfo);
 	    
+		//если preRequisites содержит ["Math", "Physics"], результат будет "Math->Physics".
+		
 	}
 	
 	
@@ -34,6 +35,6 @@ public class CourseFactory {
 			System.err.println("Error writing" + filePath + ":" + e.getMessage());
 			return false;
 		}
-		
+	
 	}
 }
