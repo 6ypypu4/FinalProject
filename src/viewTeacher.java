@@ -3,9 +3,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class viewTeacher extends viewEmployee {
-    private static int    teacherId;
+    private static int     teacherId;
     private static Teacher teacher;
-    private static int    languageChoice;
+    private static int     languageChoice;
 
     private HashMap<String, String> messages = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
@@ -33,6 +33,9 @@ public class viewTeacher extends viewEmployee {
 
         while (running) {
             System.out.println("1. " + messages.get("view_teacher_schedule"));
+            System.out.println("1. " + messages.get(""));
+            System.out.println("1. " + messages.get("view_teacher_schedule"));
+
             System.out.println("2. " + messages.get("teacher_view"));
             System.out.println("3. " + messages.get("exit"));
 
