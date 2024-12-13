@@ -11,7 +11,7 @@ public class Manager extends Employee {
 	}
 	
 	public boolean createCourse(String name, int credits, CourseType courseType, Vector<String> preRequisites) {
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter("scr\\Data\\courses.txt", true))){
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Data\\courses.txt", true))){
 			String preReq = String.join("->", preRequisites);
 			writer.write(name + "=" + credits + "=" + courseType.getTypeName() + "=" + preReq);
 			writer.newLine();
@@ -21,6 +21,6 @@ public class Manager extends Employee {
 		} 
 		
 		return false;
-		
+	
 	}
 }

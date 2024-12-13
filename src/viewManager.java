@@ -34,6 +34,7 @@ public class viewManager extends viewEmployee{
     
     public void start() {
         loadMessages();
+        createManagerFromFile("src\\Data\\users.txt");
         boolean running = true;
         while (running) {
             System.out.println("1. " + messages.get("create_course"));
