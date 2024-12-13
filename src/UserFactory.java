@@ -2,7 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class UserFactory {
+public class UserFactory implements Serializable{
 
     public static boolean createUser(int userType, int id, String name, String password, double salary) {
         String userRecord = id + "=" + userType + "=" + name + "=" + password + "=" + salary;

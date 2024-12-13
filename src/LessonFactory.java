@@ -2,7 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class LessonFactory {
+public class LessonFactory implements Serializable{
 
     private LessonType lessonType;
     private Lesson lesson;
