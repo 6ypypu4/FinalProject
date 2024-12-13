@@ -8,6 +8,7 @@ public class Admin extends Employee {
         super(id, name, password, salary);
     }
 
+
     //id=usertype=name=password=salary
     public boolean createUser(int userType, int userId, String name, String password) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Data\\users.txt", true))) {

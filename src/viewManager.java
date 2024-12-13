@@ -73,7 +73,7 @@ public class viewManager extends viewEmployee{
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("=");
+                String[] parts = line.split("");
                 if (parts.length == 5) {
                     try {
                         int id = Integer.parseInt(parts[0].trim());
@@ -84,6 +84,7 @@ public class viewManager extends viewEmployee{
                             manager = new Manager(id, name, password, salary);
                             return;
                         }
+                        
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid number format in line: " + line);
                     }
