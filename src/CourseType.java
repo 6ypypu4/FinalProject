@@ -1,7 +1,8 @@
 
 public enum CourseType {
 	
-	INTRODUCTION,
-	ADVANCED
+	MAJOR,
+	MINOR,
+	FREE_ELECTIVE
 
 }
