@@ -5,10 +5,8 @@ public class Manager extends Employee{
 	private CourseFactory courseFactory;
 	private LessonFactory lessonFactory;
 	
-	public Manager(int id, String name, String password, double salary, CourseType CourseType, LessonType LessonType) {
+	public Manager(int id, String name, String password, double salary) {
 		super(id, name, password, salary);
-		this.courseFactory = new CourseFactory(CourseType);
-		this.lessonFactory = new LessonFactory(LessonType);
 	}
 	
 	

@@ -2,18 +2,18 @@ import java.util.Date;
 import java.util.Vector;
 
 public class Lesson {
-	
-	 private LessonType type;    
+
+	    private LessonType type;
 	    private Date date;      
-	    private Teacher teacher;   
-	    private Vector<Student> students; 
+	    private String teacherId;
+	    private Vector<String> students;
 	    private Course course;
 
 
-	    public Lesson(LessonType type, Date date, Teacher teacher, Vector<Student> students, Course course) {
+	    public Lesson(LessonType type, Date date, String teacher, Vector<String> students, Course course) {
 	        this.type = type;
 	        this.date = date;
-	        this.teacher = teacher;
+	        this.teacherId = teacher;
 	        this.students = students;
 	        this.course = course;
 	    }
@@ -39,22 +39,12 @@ public class Lesson {
 		}
 
 
-		public Teacher getTeacher() {
-			return teacher;
-		}
-
-
-		public void setTeacher(Teacher teacher) {
-			this.teacher = teacher;
-		}
-
-
-		public Vector<Student> getStudents() {
+		public Vector<String> getStudents() {
 			return students;
 		}
 
 
-		public void setStudents(Vector<Student> students) {
+		public void setStudents(Vector<String> students) {
 			this.students = students;
 		}
 
@@ -70,7 +60,7 @@ public class Lesson {
 	    
 	    
 		public String toString() {
-	        return "Type: " + type + " Date: " + date + " Teacher: " + teacher.getName() + " Course: " + course.getName() + " Students: " + students.size();
+	        return "Type: " + type + " Date: " + date + " Teacher: " + teacherId + " Course: " + course.getName() + " Students: " + students.size();
 	    }
 
 }
