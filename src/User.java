@@ -16,7 +16,7 @@ public class User {
     public void subscribeToJournal(Journal journal){
         journal.newSub(this);
     }
-
+ 
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);

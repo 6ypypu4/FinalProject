@@ -24,7 +24,7 @@ public class CourseFactory {
 		//если preRequisites содержит ["Math", "Physics"], результат будет "Math->Physics".
 		
 	}
-	
+
 	
 	private static boolean saveToFile(String filePath, String data) {
 		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
