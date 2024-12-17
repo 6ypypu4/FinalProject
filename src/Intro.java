@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
+import Enums.UserType;
 
 public class Intro {
     public int id;
@@ -18,7 +19,7 @@ public class Intro {
     public void start() {
         selectLanguage();
         loadUsers("src\\Data\\authentication.txt");
-        int userType = selectUserType();
+        UserType userType = selectUserType();
         if (processLogin(userType)) {
             launchView(userType);
         } else {
@@ -44,7 +45,7 @@ public class Intro {
         }
     }
 
-    private int selectUserType() {
+    private UserType selectUserType() {
         System.out.println(messages.get("select_user_type"));
         System.out.println("1. " + messages.get("admin"));
         System.out.println("2. " + messages.get("manager"));
@@ -52,12 +53,26 @@ public class Intro {
         System.out.println("4. " + messages.get("student"));
         System.out.println("5. " + messages.get("finance_manager"));
 
-        int userType = scanner.nextInt();
+        int type = scanner.nextInt();
+        UserType userType = null;
+       
+        if (type == 1) {
+        	userType = UserType.ADMIN;
+        } else if (type == 2) {
+        	userType = UserType.MANAGER;
+        } else if (type == 3) {
+        	userType = UserType.TEACHER;
+        } else if (type == 4) {
+        	userType = UserType.STUDENT;
+        } else if (type == 5) {
+        	userType = UserType.FINANCE_MANAGER;
+        }
+        System.out.println(userType);
         scanner.nextLine();
         return userType;
     }
 
-    private boolean processLogin(int userType) {
+    private boolean processLogin(UserType userType) {
         System.out.println(messages.get("login"));
         int loginId = scanner.nextInt();
         scanner.nextLine();
@@ -68,21 +83,21 @@ public class Intro {
         return authenticateUser(userType, loginId, password);
     }
 
-    private void launchView(int userType) {
+    private void launchView(UserType userType) {
         System.out.println(messages.get("login_successful"));
-        if (userType == 1) {
+        if (userType == UserType.ADMIN) {
             viewAdmin view = new viewAdmin(id, languageChoice);
             view.start();
-        } else if (userType == 2) {
+        } else if (userType == UserType.MANAGER) {
             viewManager view = new viewManager(id, languageChoice);
             view.start();
-        } else if (userType == 3) {
+        } else if (userType == UserType.TEACHER) {
             viewTeacher view = new viewTeacher(id, languageChoice);
             view.start();
-        } else if (userType == 4) {
+        } else if (userType == UserType.STUDENT) {
             viewStudent view = new viewStudent(id, languageChoice);
             view.start();
-        } else if (userType == 5) {
+        } else if (userType == UserType.FINANCE_MANAGER) {
             viewFinanceManager view = new viewFinanceManager(id, languageChoice);
             view.start();
         }
@@ -93,14 +108,31 @@ public class Intro {
     private void loadUsers(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
+            UserType userType = null;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
                 if (parts.length == 3) {
                     try {
                         int id = Integer.parseInt(parts[0].trim());
-                        int userType = Integer.parseInt(parts[1].trim());
+                        int type = Integer.parseInt(parts[1].trim());
+                        if (type == 0) {
+                        	userType = UserType.STUDENT;
+                        } else if (type == 1) {
+                        	userType = UserType.TEACHER;
+                        } else if (type == 2) {
+                        	userType = UserType.ADMIN;
+                        } else if (type == 3) {
+                        	userType = UserType.MANAGER;
+                        } else if (type == 4) {
+                        	userType = UserType.FINANCE_MANAGER;
+                        } else if (type == 5) {
+                        	userType = UserType.DEAN;
+                        }
                         String password = parts[2].trim();
                         auths.add(new Auth(id, userType, password));
+                        
+                        for (Auth a : auths) System.out.println(a.userType);
+                        
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid number format in line: " + line);
                     }
@@ -113,7 +145,7 @@ public class Intro {
         }
     }
 
-    private boolean authenticateUser(int userType, int loginId, String password) {
+    private boolean authenticateUser(UserType userType, int loginId, String password) {
         for (Auth auth : auths) {
             if (auth.login(userType, loginId, password)) {
                 this.id = loginId;

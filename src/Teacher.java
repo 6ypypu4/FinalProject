@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import Enums.UrgencyLevel;
+
 public class Teacher extends Employee {
 
     private ArrayList<String> courses = new ArrayList<>();
@@ -55,8 +57,10 @@ public class Teacher extends Employee {
     }
 
     // Send a complaint
-    public void sendComplaint(String complaint) {
-        System.out.println("Complaint filed: " + complaint);
+    public void sendComplaint(int studentId, UrgencyLevel level, String complaintText) {
+    	Complaint complaint = new Complaint(studentId, level, complaintText);
+    	
+        System.out.println("Complaint filed: " + complaintText);
     }
 
 }
