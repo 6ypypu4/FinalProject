@@ -57,7 +57,7 @@ public class Teacher extends Employee {
     }
 
     // Send a complaint
-    public void sendComplaint(int studentId, UrgencyLevel level, String complaintText) {
+    public void sendComplaint(String studentId, UrgencyLevel level, String complaintText) {
     	Complaint complaint = new Complaint(studentId, level, complaintText);
     	
         System.out.println("Complaint filed: " + complaintText);

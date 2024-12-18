@@ -1,10 +1,10 @@
 package Enums;
 
 public enum UserType {
-	STUDENT, 			// 0
-	TEACHER, 			// 1
-	ADMIN, 				// 2
-	MANAGER,			// 3
-	FINANCE_MANAGER, 	// 4
-	DEAN,				// 5
+	STUDENT, 			// 4
+	TEACHER, 			// 3
+	ADMIN, 				// 1
+	MANAGER,			// 2
+	FINANCE_MANAGER, 	// 5
+	DEAN,				// 6
 }

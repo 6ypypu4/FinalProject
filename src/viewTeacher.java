@@ -1,3 +1,5 @@
+import Enums.UrgencyLevel;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class viewTeacher extends viewEmployee {
     private HashMap<String, String> messages = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private MessageLoader messageLoader = new MessageLoader();
+    private Messenger messenger = new Messenger();
 
     public viewTeacher(int teacherId, int languageChoice) {
         viewTeacher.teacherId = teacherId;
@@ -56,7 +59,7 @@ public class viewTeacher extends viewEmployee {
             } else if (choice == 5) {
                 putMarks();
             } else if (choice == 6) {
-                sendMessage1();
+                sendMessage();
             } else if (choice == 7) {
                 sendComplaint();
             } else if (choice == 8) {
@@ -70,13 +73,19 @@ public class viewTeacher extends viewEmployee {
     }
 
     private void sendComplaint() {
+        System.out.println(messages.get("insert_student_id"));
+        String studentId = scanner.nextLine();
         System.out.println(messages.get("insert_complain"));
         String complain = scanner.nextLine();
-        teacher.sendComplaint(complain);
+        teacher.sendComplaint(studentId, UrgencyLevel.MEDIUM, complain);
     }
 
-    private void sendMessage1() {
-        sendMessage(teacherId);
+    private void sendMessage() {
+        System.out.println(messages.get("insert_employee_id"));
+        int employeeId = scanner.nextInt();
+        System.out.println(messages.get("insert_message"));
+        String message = scanner.nextLine();
+        messenger.sendMessage(employeeId, teacherId, message);
     }
 
     private void putMarks() {

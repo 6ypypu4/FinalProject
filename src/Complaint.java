@@ -1,23 +1,14 @@
 import Enums.UrgencyLevel;
 
 public class Complaint {
-	private int studentId;
+	private String studentId;
 	private UrgencyLevel urgencyLevel;
 	private String comment;
 	
-	public Complaint(int studentId, UrgencyLevel urgencyLevel, String comment) {
-		super();
+	public Complaint(String studentId, UrgencyLevel urgencyLevel, String comment) {
 		this.studentId = studentId;
 		this.urgencyLevel = urgencyLevel;
 		this.comment = comment;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
 	}
 
 	public UrgencyLevel getUrgencyLevel() {
