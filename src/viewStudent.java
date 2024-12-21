@@ -105,7 +105,7 @@ public class viewStudent extends viewUser {
 
     @Override
     protected void displayInfo() {
-        student.viewStudentInfo();
+        //rework
     }
 
     @Override
@@ -114,12 +114,16 @@ public class viewStudent extends viewUser {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
-                if (parts.length >= 3) {
+                if (parts.length >= 4) {
                     try {
+
+
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[2].trim();
+                        String password = parts[3].trim();
+
                         if (id == studentId) {
-                            student = new Student(name, id);
+                            student = new Student(id, name, password);
                             return;
                         }
                     } catch (NumberFormatException e) {

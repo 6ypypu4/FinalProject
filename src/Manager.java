@@ -7,15 +7,17 @@ public class Manager extends Employee{
 	
 	public Manager(int id, String name, String password, double salary) {
 		super(id, name, password, salary);
+		courseFactory = new CourseFactory();
+		lessonFactory = new LessonFactory();
 	}
 	
 	
-	public boolean createCourse(String courseId, String name, int credits, Vector<String> preRequisites) {
-		return courseFactory.createCourse(courseId, name, credits, preRequisites);
+	public boolean createCourse(String courseId, String name, int courseTypeId, int credits, Vector<String> preRequisites) {
+		return courseFactory.createCourse(courseId, name, courseTypeId, credits, preRequisites);
 	}
 	
-	public void createLesson(Lesson lesson, Teacher teacher) {
-		lessonFactory.createLesson(lesson, teacher);
+	public boolean createLesson(Course course, String date, int lessonTypeId, Teacher teacher) {
+		return lessonFactory.createLesson(course, date, lessonTypeId, teacher);
 	}
 	
 	public boolean addStudent(Lesson lesson, Student student) {

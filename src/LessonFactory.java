@@ -6,27 +6,30 @@ import java.io.IOException;
 
 public class LessonFactory implements Serializable{
 
-    private LessonType lessonType;
-    private Lesson lesson;
-
-    public LessonFactory(LessonType lessonType) {
-        this.lessonType = lessonType;
+    public LessonFactory() {
     }
 
-    public LessonFactory(Lesson lesson) {
-        this.lesson = lesson;
+    public boolean createLesson(Course course, String date, int lessonTypeId, Teacher teacher) {
+        // Convert lessonTypeId to corresponding LessonType
+        LessonType type;
+        
+        if (lessonTypeId == 1) {
+            type = LessonType.LECTURE;
+        } else if (lessonTypeId == 2) {
+            type = LessonType.PRACTICE;
+        } else if (lessonTypeId == 3) {
+            type = LessonType.LAB;
+        } else {
+            return false;
+        }
+        
+        String lessonInfo = type + "=" + date + "=" + teacher.getName() + "=" + course.getName();
+        return saveToFile("src\\Data\\lessons.txt", lessonInfo);
     }
 
     public boolean addStudent(Lesson lesson, Student student) {
-    	
         String studentInfo = lesson.getCourse().getName() + "=" + lesson.getDate() + "=" + student.getName();
         return saveToFile("src\\Data\\lessons.txt", studentInfo);
-    }
-
-    public void createLesson(Lesson lesson, Teacher teacher) {
-    	
-        String lessonInfo = lesson.getType() + "=" + lesson.getDate() + "=" + teacher.getName() + "=" + lesson.getCourse().getName();
-        saveToFile("src\\Data\\lessons.txt", lessonInfo);
     }
 
     private static boolean saveToFile(String filePath, String data) {

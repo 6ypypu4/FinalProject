@@ -1,11 +1,8 @@
 import Enums.LessonType;
-
+import Enums.CourseType;
 import java.io.*;
 import java.util.*;
 import java.util.Vector;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.io.File;
 
 public class viewManager extends viewEmployee {
     private int managerId;
@@ -112,17 +109,20 @@ public class viewManager extends viewEmployee {
         System.out.print(messages.get("enter_course_name") + " ");
         String name = scanner.nextLine();
 
+        System.out.println(messages.get("select_course_type"));
+        int courseTypeId = selectCourseType();
+
         System.out.print(messages.get("enter_credits") + " ");
         int credits = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Clear input buffer
 
         System.out.print(messages.get("enter_pre_requisites") + " ");
         String prerequisitesInput = scanner.nextLine();
         Vector<String> preRequisites = new Vector<>(Arrays.asList(prerequisitesInput.split(",")));
 
-        boolean success = manager.createCourse(courseId, name, credits, preRequisites);
+        boolean success = manager.createCourse(courseId, name, courseTypeId, credits, preRequisites);
         if (success) {
-            courses.add(new Course(courseId, "General", name, credits, preRequisites));
+            courses.add(new Course(courseId, CourseType.values()[courseTypeId-1].toString(), name, credits, preRequisites));
             System.out.println(messages.get("course_created"));
         } else {
             System.out.println(messages.get("course_creation_failed"));
@@ -130,43 +130,27 @@ public class viewManager extends viewEmployee {
     }
 
     private void createLesson() {
-        System.out.println(messages.get("select_lesson_type"));
-        LessonType lessonType = selectLessonType();
-
-        System.out.print(messages.get("enter_lesson_date") + " (yyyy-MM-dd) ");
-        String dateInput = scanner.nextLine();
-        Date date;
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            date = dateFormat.parse(dateInput);
-        } catch (ParseException e) {
-            System.out.println(messages.get("invalid_date_format"));
-            return;
-        }
-
-        System.out.print(messages.get("enter_teacher_id") + " ");
-        String teacherId = scanner.nextLine();
-
-        System.out.print(messages.get("enter_course_name") + " ");
+        System.out.println("Enter course name:");
         String courseName = scanner.nextLine();
         Course course = findCourseByName(courseName);
 
-        if (course == null) {
-            System.out.println(messages.get("course_not_found"));
-            return;
+        System.out.println("Enter date (format: DD/MM/YYYY):");
+        String date = scanner.nextLine();
+
+        System.out.println("Enter lesson type (1-Lecture, 2-Practice, 3-Lab):");
+        int lessonTypeId = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        System.out.println("Enter teacher name:");
+        String teacherName = scanner.nextLine();
+        Teacher teacher = findTeacherByName(teacherName);
+
+        if (manager.createLesson(course, date, lessonTypeId, teacher)) {
+            System.out.println("Lesson created successfully!");
+        } else {
+            System.out.println("Failed to create lesson. Please check your inputs.");
         }
-
-        System.out.print(messages.get("enter_student_ids") + " ");
-        String studentIdsInput = scanner.nextLine(); // Ввод ID студентов через запятую
-        Vector<String> studentIds = new Vector<>(Arrays.asList(studentIdsInput.split(",")));
-
-        // Создание урока с Enums.LessonType, ID учителя и студентов
-        Lesson lesson = new Lesson(lessonType, date, teacherId, studentIds, course);
-        lessons.add(lesson);
-
-        System.out.println(messages.get("lesson_created"));
     }
-
 
     private LessonType selectLessonType() {
         while (true) {
@@ -190,6 +174,23 @@ public class viewManager extends viewEmployee {
         }
     }
 
+    private int selectCourseType() {
+        while (true) {
+            System.out.println("1. MAJOR");
+            System.out.println("2. MINOR");
+            System.out.println("3. FREE_ELECTIVE");
+            System.out.print(messages.get("enter_choice") + " ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Clear input buffer
+
+            if (choice >= 1 && choice <= 3) {
+                return choice;
+            } else {
+                System.out.println(messages.get("invalid_choice"));
+            }
+        }
+    }
 
     private Course findCourseByName(String courseName) {
         for (Course course : courses) {
@@ -197,6 +198,12 @@ public class viewManager extends viewEmployee {
                 return course;
             }
         }
+        return null;
+    }
+
+    private Teacher findTeacherByName(String teacherName) {
+        // Implement this method to find a teacher by name from your data source
+        // For now, we'll return null
         return null;
     }
 }

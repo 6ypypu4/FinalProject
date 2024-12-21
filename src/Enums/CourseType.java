@@ -2,8 +2,8 @@ package Enums;
 
 public enum CourseType {
 	
-	MAJOR,
-	MINOR,
-	FREE_ELECTIVE
+	MAJOR, //1
+	MINOR,  //2
+	FREE_ELECTIVE //3
 
 }
