@@ -4,38 +4,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Student extends User {
-    private Vector<Integer> grades;
     private List<Course> registeredCourses;
     private HashMap<Course, Integer> courseGrades;
     private List<StudentOrganization> organizations;
-    private HashMap<Teacher, Integer> teacherRatings;
-    private boolean isOrgHead;
+    private boolean isOrgHead = false;
 
     // Конструктор
-
-
-    public Student(int id, String name, String password) {
+    public Student(int id, String name, String password, String isOrg) {
         super(id, name, password);
-        this.grades = new Vector<>();
+        if(isOrg.equals("1")){
+            this.isOrgHead= true;
+        }
         this.registeredCourses = new ArrayList<>();
         this.courseGrades = new HashMap<>();
         this.organizations = new ArrayList<>();
-        this.teacherRatings = new HashMap<>();
-        this.isOrgHead = false;
     }
-
-
-    // Метод для добавления оценки
-    public void addGrade(int grade) {
-        this.grades.add(grade);
-    }
-
-    // Метод для просмотра всех оценок
-    public void viewGrades() {
-        System.out.println("Оценки студента " + name + ": " + grades);
-    }
-
-
 
     // Course Registration Methods
     public void registerForCourse(Course course) {
@@ -81,7 +64,7 @@ public class Student extends User {
     // Teacher Feedback Methods
     public void rateTeacher(Teacher teacher, int rating) {
         if (rating >= 1 && rating <= 5) {
-            teacherRatings.put(teacher, rating);
+            RateFactory.rateTeacher(id, teacher.id, rating);
             System.out.println("Rating submitted successfully");
         } else {
             System.out.println("Invalid rating. Please rate from 1 to 5");

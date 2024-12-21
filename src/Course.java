@@ -60,8 +60,8 @@ public class Course {
 		return "Course [courseId=" + courseId + 
 				", courseType=" + courseType + 
 				", name=" + name + 
-				", credits=" + credits
-				+ ", preRequisites=" + preRequisites + "]";
+				", credits=" + credits +
+				", preRequisites=" + preRequisites + "]";
 	}
 
 	
