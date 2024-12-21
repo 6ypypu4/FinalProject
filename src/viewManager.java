@@ -3,11 +3,14 @@ import Enums.LessonType;
 import java.io.*;
 import java.util.*;
 import java.util.Vector;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.io.File;
 
 public class viewManager extends viewEmployee {
-    private static int managerId;
-    private static Manager manager;
-    private static int languageChoice;
+    private int managerId;
+    private Manager manager;
+    private int languageChoice;
 
     private HashMap<String, String> messages = new HashMap<>();
     private MessageLoader messageLoader = new MessageLoader();
@@ -16,8 +19,8 @@ public class viewManager extends viewEmployee {
     private Vector<Lesson> lessons = new Vector<>();
 
     public viewManager(int managerId, int languageChoice) {
-        viewManager.managerId = managerId;
-        viewManager.languageChoice = languageChoice;
+        this.managerId = managerId;
+        this.languageChoice = languageChoice;
     }
 
     @Override
@@ -130,9 +133,16 @@ public class viewManager extends viewEmployee {
         System.out.println(messages.get("select_lesson_type"));
         LessonType lessonType = selectLessonType();
 
-        System.out.print(messages.get("enter_lesson_date") + " ");
+        System.out.print(messages.get("enter_lesson_date") + " (yyyy-MM-dd) ");
         String dateInput = scanner.nextLine();
-        Date date = new Date(dateInput); // Можно использовать SimpleDateFormat для корректного парсинга даты.
+        Date date;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateFormat.parse(dateInput);
+        } catch (ParseException e) {
+            System.out.println(messages.get("invalid_date_format"));
+            return;
+        }
 
         System.out.print(messages.get("enter_teacher_id") + " ");
         String teacherId = scanner.nextLine();

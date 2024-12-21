@@ -36,8 +36,9 @@ public class viewAdmin extends viewEmployee {
             System.out.println("2. " + messages.get("update_user"));
             System.out.println("3. " + messages.get("delete_user"));
             System.out.println("4. " + messages.get("admin_view"));
-            System.out.println("5. " + messages.get("create_user"));
-            System.out.println("6. " + messages.get("exit"));
+            System.out.println("5. " + messages.get("check_logs"));
+            System.out.println("6. " + messages.get("view_users"));
+            System.out.println("7. " + messages.get("exit"));
 
             System.out.print(messages.get("enter_choice") + " ");
             int choice = scanner.nextInt();
@@ -57,8 +58,10 @@ public class viewAdmin extends viewEmployee {
                 admin.setFilterCriteria(criteria);
                 admin.checkLogs();
             } else if (choice == 6) {
+                admin.viewAllUsers();
+            } else if (choice == 7) {
                 running = false;
-            } else  {
+            } else {
                 System.out.println(messages.get("invalid_choice"));
             }
         }
