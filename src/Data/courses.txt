@@ -1,3 +1,2 @@
-/id /courseName /credits
-1=oop=3=1->2
 --courseId--name--credits--preReqs--
+1=oop=3=1->2
