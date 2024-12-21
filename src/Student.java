@@ -3,9 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Student {
-    private String name;
-    private int studentID;
+public class Student extends User {
     private Vector<Integer> grades;
     private List<Course> registeredCourses;
     private HashMap<Course, Integer> courseGrades;
@@ -14,9 +12,10 @@ public class Student {
     private boolean isOrgHead;
 
     // Конструктор
-    public Student(String name, int studentID) {
-        this.name = name;
-        this.studentID = studentID;
+
+
+    public Student(int id, String name, String password) {
+        super(id, name, password);
         this.grades = new Vector<>();
         this.registeredCourses = new ArrayList<>();
         this.courseGrades = new HashMap<>();
@@ -25,22 +24,6 @@ public class Student {
         this.isOrgHead = false;
     }
 
-    // Геттеры и сеттеры
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
-    }
 
     // Метод для добавления оценки
     public void addGrade(int grade) {
@@ -52,11 +35,7 @@ public class Student {
         System.out.println("Оценки студента " + name + ": " + grades);
     }
 
-    // Метод для вывода полной информации о студенте
-    public void viewStudentInfo() {
-        System.out.println("ID: " + studentID + ", Имя: " + name);
-        viewGrades();
-    }
+
 
     // Course Registration Methods
     public void registerForCourse(Course course) {
@@ -75,7 +54,7 @@ public class Student {
 
     // Marks and Transcript Methods
     public void viewTranscript() {
-        System.out.println("Transcript for " + name + " (ID: " + studentID + ")");
+        System.out.println("Transcript for " + name + " (ID: " + id + ")");
         for (Course course : courseGrades.keySet()) {
             System.out.println(course.getName() + ": " + courseGrades.get(course));
         }

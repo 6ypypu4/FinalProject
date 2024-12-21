@@ -1,8 +1,6 @@
-1=1=pakita=1=5000000
-2=1=wow=2=0
-52=1=beatuha=1488=0
-5=3=nikita=1488=0.0
-10=5=aslan=900=0.0
-90=3=шушук=90=0.0
-88=2=nikita=88=0.0
-32=3=okya=32=0.0
+1=1=admin=1=0
+2=2=manager=2=0
+3=3=teacher=3=0
+4=4=student=4=0
+5=5=financeManager=5=0
+6=6=dean=6=0

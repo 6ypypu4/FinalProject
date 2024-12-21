@@ -5,25 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 public class CourseFactory {
-	
-	private CourseType courseType;
-	private Course course;
-	
-	public CourseFactory(CourseType courseType) {
-		this.courseType = courseType;
+
+	public CourseFactory() {
 	}
-	
-	public CourseFactory(Course course) {
-		this.course = course;
-	}
-	
-	public boolean createCourse(String courseId, String name, int credits, Vector<String> preRequisites) {
+
+	public boolean createCourse(String courseId, String name, int courseTypeId, int credits, Vector<String> preRequisites) {
 		
-		String preReq = String.join("->", preRequisites);
-	    String courseInfo = courseId + '=' + name + '=' + credits + '=' + preReq;
+		String preReq = String.join("-", preRequisites);
+	    String courseInfo = courseId + '=' + name + '=' + courseTypeId + '=' + credits + '=' + preReq;
 		return saveToFile("src\\Data\\courses.txt", courseInfo);
 	    
-		//если preRequisites содержит ["Math", "Physics"], результат будет "Math->Physics".
+		//если preRequisites содержит ["Math", "Physics"], результат будет "Math-Physics".
 		
 	}
 

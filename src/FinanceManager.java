@@ -23,7 +23,6 @@ public class FinanceManager extends Employee{
 	        for (FinanceOffice office : offices) {
 	            if (office.getEmployees().contains(employee)) {
 	                office.addEmployee(employee, salary);
-	                System.out.println("Salary set for " + employee.getName() + ": " + salary);
 	                return;
 	            }
 	        }
@@ -42,7 +41,7 @@ public class FinanceManager extends Employee{
 	   
 	   public void viewBudget() {
 	        System.out.println("Current budget: $" + budget);
-	        System.out.println("\nBudget breakdown by office:");
+	        System.out.println("Budget breakdown by office:");
 	        for (FinanceOffice office : offices) {
 	            double officeBudget = office.calculateTotalSalaries();
 	            System.out.println(office + ": $" + officeBudget);
