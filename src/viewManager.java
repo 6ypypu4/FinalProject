@@ -1,3 +1,5 @@
+import Enums.LessonType;
+
 import java.io.*;
 import java.util.*;
 import java.util.Vector;
@@ -148,7 +150,7 @@ public class viewManager extends viewEmployee {
         String studentIdsInput = scanner.nextLine(); // Ввод ID студентов через запятую
         Vector<String> studentIds = new Vector<>(Arrays.asList(studentIdsInput.split(",")));
 
-        // Создание урока с LessonType, ID учителя и студентов
+        // Создание урока с Enums.LessonType, ID учителя и студентов
         Lesson lesson = new Lesson(lessonType, date, teacherId, studentIds, course);
         lessons.add(lesson);
 
@@ -160,7 +162,7 @@ public class viewManager extends viewEmployee {
         while (true) {
             System.out.println("1. LECTURE");
             System.out.println("2. PRACTICE");
-            System.out.println("3. LABORATORY");
+            System.out.println("3. LAB");
             System.out.print(messages.get("enter_choice") + " ");
 
             int choice = scanner.nextInt();
@@ -171,7 +173,7 @@ public class viewManager extends viewEmployee {
             } else if (choice == 2) {
                 return LessonType.PRACTICE;
             } else if (choice == 3) {
-                return LessonType.LABORATORY;
+                return LessonType.LAB;
             } else {
                 System.out.println(messages.get("invalid_choice"));
             }
