@@ -4,6 +4,7 @@ view_students=Студенттерді көру
 manage_student_info=Студент ақпаратын басқару
 put_marks=Баға қою
 send_message=Хабарлама жіберу
+view_messages=Хабарларды көру
 send_complaint=Шағым беру
 teacher_view=Мұғалім ақпаратын көру
 exit=Шығу

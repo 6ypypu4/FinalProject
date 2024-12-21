@@ -67,7 +67,6 @@ public class Intro {
         } else if (type == 5) {
         	userType = UserType.FINANCE_MANAGER;
         }
-        System.out.println(userType);
         scanner.nextLine();
         return userType;
     }
@@ -115,14 +114,14 @@ public class Intro {
                     try {
                         int id = Integer.parseInt(parts[0].trim());
                         int type = Integer.parseInt(parts[1].trim());
-                        if (type == 4) {
-                        	userType = UserType.STUDENT;
-                        } else if (type == 3) {
-                        	userType = UserType.TEACHER;
-                        } else if (type == 1) {
+                        if (type == 1) {
                         	userType = UserType.ADMIN;
                         } else if (type == 2) {
                         	userType = UserType.MANAGER;
+                        } else if (type == 3) {
+                        	userType = UserType.TEACHER;
+                        } else if (type == 4) {
+                        	userType = UserType.STUDENT;
                         } else if (type == 5) {
                         	userType = UserType.FINANCE_MANAGER;
                         } else if (type == 6) {
@@ -130,8 +129,6 @@ public class Intro {
                         }
                         String password = parts[2].trim();
                         auths.add(new Auth(id, userType, password));
-                        
-                        for (Auth a : auths) System.out.println(a.userType);
                         
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid number format in line: " + line);

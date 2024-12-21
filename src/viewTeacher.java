@@ -12,7 +12,6 @@ public class viewTeacher extends viewEmployee {
     private HashMap<String, String> messages = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private MessageLoader messageLoader = new MessageLoader();
-    private Messenger messenger = new Messenger();
 
     public viewTeacher(int teacherId, int languageChoice) {
         viewTeacher.teacherId = teacherId;
@@ -41,9 +40,10 @@ public class viewTeacher extends viewEmployee {
             System.out.println("4. " + messages.get("manage_student_info"));
             System.out.println("5. " + messages.get("put_marks"));
             System.out.println("6. " + messages.get("send_message"));
-            System.out.println("7. " + messages.get("send_complaint"));
-            System.out.println("8. " + messages.get("teacher_view"));
-            System.out.println("9. " + messages.get("exit"));
+            System.out.println("7. " + messages.get("view_messages"));
+            System.out.println("8. " + messages.get("send_complaint"));
+            System.out.println("9. " + messages.get("teacher_view"));
+            System.out.println("10. " + messages.get("exit"));
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Clear the newline character
@@ -61,10 +61,12 @@ public class viewTeacher extends viewEmployee {
             } else if (choice == 6) {
                 sendMessage();
             } else if (choice == 7) {
-                sendComplaint();
+            	viewMessages();
             } else if (choice == 8) {
-                displayInfo();
+                sendComplaint();
             } else if (choice == 9) {
+                displayInfo();
+            } else if (choice == 10) {
                 running = false;
             } else {
                 System.out.println(messages.get("invalid_choice"));
@@ -85,9 +87,13 @@ public class viewTeacher extends viewEmployee {
         int employeeId = scanner.nextInt();
         System.out.println(messages.get("insert_message"));
         String message = scanner.nextLine();
-        messenger.sendMessage(employeeId, teacherId, message);
+        teacher.sendWorkMessage(employeeId, message);
     }
-
+    
+    private void viewMessages() {
+    	teacher.getMail();
+    }
+    
     private void putMarks() {
         System.out.println(messages.get("enter_student_id"));
         int studentId = Integer.parseInt(scanner.nextLine());
