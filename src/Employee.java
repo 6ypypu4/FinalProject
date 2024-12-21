@@ -22,7 +22,6 @@ public class Employee extends User {
 	public void sendWorkMessage(int toId, String message) {
 		messages.sendMessage(toId, id, message);
 	}
-	
-    
-    
-} 
+
+
+}

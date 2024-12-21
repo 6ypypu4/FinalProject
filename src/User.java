@@ -25,4 +25,8 @@ public class User {
     public String getName() {
         return name;
     }
+
+    protected int getId() {
+        return id;
+    }
 }
