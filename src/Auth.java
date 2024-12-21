@@ -12,6 +12,8 @@ public class Auth {
     }
 
     public boolean login(UserType userType, int loginId, String password) {
-        return this.id == loginId && this.password.equals(password) && this.userType == userType;
+    	return this.id == loginId && 
+        		this.password.equals(password) && 
+        		this.userType == userType;
     }
 }

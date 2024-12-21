@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class Admin extends Employee {
+	
     private String filterCriteria;
     private LogManager logManager;
-
 
     public Admin(int id, String name, String password, double salary) {
         super(id, name, password, salary);

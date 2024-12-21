@@ -14,7 +14,6 @@ public class Messenger {
     }
 
     public void readMessages(int id) {
-    	System.out.print(123);
         try (BufferedReader reader = new BufferedReader(new FileReader(MESSAGES_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {

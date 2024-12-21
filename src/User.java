@@ -1,6 +1,6 @@
 public class User {
     protected int id;
-    public String name;
+    protected String name;
     private String password;
 
     public User(int id, String name, String password){
