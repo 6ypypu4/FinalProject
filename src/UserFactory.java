@@ -50,6 +50,19 @@ class UserFactory implements Serializable {
         return overwriteFile(userFilePath, users);
     }
 
+    public static List<String> getAllUsers() {
+        List<String> users = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Data\\users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                users.add(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading users: " + e.getMessage());
+        }
+        return users;
+    }
+
     private static boolean saveToFile(String filePath, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(data);

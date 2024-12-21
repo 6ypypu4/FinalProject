@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import Enums.UrgencyLevel;
@@ -36,7 +37,7 @@ public class Teacher extends Employee {
     // View information about students
     public void viewStudents() {
         System.out.println("Students under teacher " + getName() + ":");
-        for (var entry : students.entrySet()) {
+        for (Map.Entry<Integer, String> entry : students.entrySet()) {
             System.out.println("Student ID: " + entry.getKey() + ", Info: " + entry.getValue());
         }
     }

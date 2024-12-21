@@ -23,4 +23,12 @@ public class FinanceOffice {
         return "FinanceOffice: " + name;
     }
     
+    public double calculateTotalSalaries() {
+        double total = 0;
+        for (Employee employee : employees) {
+            total += employee.getSalary();
+        }
+        return total;
+    }
+    
 }

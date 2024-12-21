@@ -44,4 +44,12 @@ public class Admin extends Employee {
     public void setFilterCriteria(String filterCriteria) {
         this.filterCriteria = filterCriteria;
     }
+
+    public void viewAllUsers() {
+        List<String> users = UserFactory.getAllUsers();
+        System.out.println("All Users:");
+        for (String user : users) {
+            System.out.println(user);
+        }
+    }
 }
