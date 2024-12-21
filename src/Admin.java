@@ -1,6 +1,5 @@
 import java.util.List;
 
-// Example usage in Admin class
 public class Admin extends Employee {
     private String filterCriteria;
     private LogManager logManager;
@@ -28,7 +27,7 @@ public class Admin extends Employee {
         }
     }
 
-    // Method to create a user using UserFactory
+    // Method to change a user using UserFactory
     public boolean createUser(int userType, int userId, String name, String password) {
         return UserFactory.createUser(userType, userId, name, password, 0);
     }

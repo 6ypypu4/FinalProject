@@ -115,17 +115,17 @@ public class Intro {
                     try {
                         int id = Integer.parseInt(parts[0].trim());
                         int type = Integer.parseInt(parts[1].trim());
-                        if (type == 0) {
+                        if (type == 4) {
                         	userType = UserType.STUDENT;
-                        } else if (type == 1) {
-                        	userType = UserType.TEACHER;
-                        } else if (type == 2) {
-                        	userType = UserType.ADMIN;
                         } else if (type == 3) {
+                        	userType = UserType.TEACHER;
+                        } else if (type == 1) {
+                        	userType = UserType.ADMIN;
+                        } else if (type == 2) {
                         	userType = UserType.MANAGER;
-                        } else if (type == 4) {
-                        	userType = UserType.FINANCE_MANAGER;
                         } else if (type == 5) {
+                        	userType = UserType.FINANCE_MANAGER;
+                        } else if (type == 6) {
                         	userType = UserType.DEAN;
                         }
                         String password = parts[2].trim();
