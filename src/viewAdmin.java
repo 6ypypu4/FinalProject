@@ -2,13 +2,12 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class viewAdmin extends viewEmployee{
+public class viewAdmin extends viewEmployee {
     private static int    adminId;
     private static Admin  admin;
     private static int    languageChoice;
 
     private HashMap<String, String> messages = new HashMap<>();
-    private Scanner scanner = new Scanner(System.in);
     private MessageLoader messageLoader = new MessageLoader();
 
     public viewAdmin(int adminId, int languageChoice) {

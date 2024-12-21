@@ -4,6 +4,7 @@ view_students=Просмотр студентов
 manage_student_info=Управление информацией о студентах
 put_marks=Выставление оценок
 send_message=Отправить сообщение
+view_messages=Посмотреть сообщения
 send_complaint=Подать жалобу
 teacher_view=Просмотр информации учителя
 exit=Выход

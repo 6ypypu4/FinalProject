@@ -8,7 +8,6 @@ public class viewManager extends viewEmployee {
     private static int languageChoice;
 
     private HashMap<String, String> messages = new HashMap<>();
-    private Scanner scanner = new Scanner(System.in);
     private MessageLoader messageLoader = new MessageLoader();
 
     private Vector<Course> courses = new Vector<>();

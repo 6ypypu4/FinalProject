@@ -1,5 +1,5 @@
 public class User {
-    private int id;
+    protected int id;
     public String name;
     private String password;
 
