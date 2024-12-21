@@ -18,10 +18,6 @@ public class FinanceOffice {
         employee.setSalary(salary);
         employees.add(employee);
     }
-
-    public String toString() {
-        return "FinanceOffice: " + name;
-    }
     
     public double calculateTotalSalaries() {
         double total = 0;
@@ -30,5 +26,12 @@ public class FinanceOffice {
         }
         return total;
     }
+
+	@Override
+	public String toString() {
+		return "FinanceOffice [name=" + name + 
+				", employees=" + employees + "]";
+	}
+    
     
 }

@@ -1,6 +1,7 @@
 package Enums;
 
 public enum UserType {
+	
 	ADMIN, 				// 1
 	MANAGER,			// 2
 	TEACHER, 			// 3

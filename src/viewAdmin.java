@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class viewAdmin extends viewEmployee {
     private static int    adminId;

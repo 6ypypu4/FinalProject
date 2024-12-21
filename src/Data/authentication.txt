@@ -1,3 +1,4 @@
+--UserType--userId--password--
 1=1=1
 2=1=2
 52=1=1488

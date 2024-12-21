@@ -1,4 +1,7 @@
 import Enums.UrgencyLevel;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 
 public class Complaint {
 	private String studentId;
@@ -29,19 +32,29 @@ public class Complaint {
 
 	public void saveComplaint() {
 		try {
-			java.io.FileWriter fw = new java.io.FileWriter("src/data/complaints.txt", true);
-			java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
+			FileWriter fw = new FileWriter("src/data/complaints.txt", true);
+			// true means that new line will be added at the end of the file
+			BufferedWriter bw = new BufferedWriter(fw);
 			
 			String complaintData = studentId + "=" + urgencyLevel + "=" + comment;
+			
 			bw.write(complaintData);
 			bw.newLine();
 			
 			bw.close();
 			fw.close();
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			System.out.println("Error saving complaint: " + e.getMessage());
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Complaint [studentId=" + studentId 
+				+ ", urgencyLevel=" + urgencyLevel 
+				+ ", comment=" + comment + "]";
+	}
+	
+	
 	
 }

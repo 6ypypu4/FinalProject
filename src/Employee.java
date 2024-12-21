@@ -15,12 +15,12 @@ public class Employee extends User {
 		this.salary = salary;
 	}
 	
-	public void getMail() {
-		messages.readMessages(id);
+	public void getWorkMessages() {
+		messages.readMessages(this.id);
 	}
 	
 	public void sendWorkMessage(int toId, String message) {
-		messages.sendMessage(toId, id, message);
+		messages.sendMessage(toId, this.id, message);
 	}
 
 

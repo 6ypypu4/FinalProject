@@ -40,7 +40,6 @@ class UserFactory implements Serializable {
     public static boolean deleteUser(int userId) {
         String userFilePath = "src\\Data\\users.txt";
         List<String> users = readFromFile(userFilePath);
-        boolean deleted = false;
 
         users.removeIf(user -> {
             String[] userDetails = user.split("=");

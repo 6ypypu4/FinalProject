@@ -1,1 +1,1 @@
-/id /courseName /credits
+--courseId--name--credits--preReqs--

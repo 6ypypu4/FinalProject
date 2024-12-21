@@ -9,7 +9,6 @@ public class Teacher extends Employee {
 
     private ArrayList<String> courses = new ArrayList<>();
     private HashMap<Integer, String> students = new HashMap<>(); // studentId -> info
-    private Scanner scanner = new Scanner(System.in);
 
     public Teacher(int id, String name, String password, double salary) {
         super(id, name, password, salary);
@@ -60,6 +59,7 @@ public class Teacher extends Employee {
     // Send a complaint
     public void sendComplaint(String studentId, UrgencyLevel level, String complaintText) {
     	Complaint complaint = new Complaint(studentId, level, complaintText);
+    	complaint.saveComplaint();
     	
         System.out.println("Complaint filed: " + complaintText);
     }
