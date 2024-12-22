@@ -21,6 +21,10 @@ public class viewFinanceManager extends viewUser {
         this.messages = new HashMap<>();
         this.messageLoader = new MessageLoader();
         this.languageChoice = languageChoice;
+        createUserFromFile("src\\Data\\users.txt");
+        if (financeManager != null) {
+            financeManager.attachObserver(this);
+        }
     }
 
     @Override
@@ -55,7 +59,6 @@ public class viewFinanceManager extends viewUser {
     @Override
     public void start() {
         loadMessages();
-        createUserFromFile("src\\Data\\users.txt");
         boolean running = true;
 
         while (running) {
@@ -116,5 +119,10 @@ public class viewFinanceManager extends viewUser {
     protected void displayInfo() {
         System.out.println(messages.get("finance_manager_id") + ": " + financeManager.getId());
         System.out.println(messages.get("name") + ": " + financeManager.getName());
+    }
+
+    public void updateView() {
+        System.out.println(messages.get("update_notification"));
+        viewBudget();
     }
 }

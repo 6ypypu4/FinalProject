@@ -1,11 +1,14 @@
 package main;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinanceManager extends Employee{
 	
 	private Vector<FinanceOffice> offices;
 	private double budget;
+	private List<viewFinanceManager> observers = new ArrayList<>();
 	
 	public FinanceManager(int id, String name, String password, double salary) {
         super(id, name, password, salary);
@@ -53,6 +56,7 @@ public class FinanceManager extends Employee{
 	            for (Employee employee : office.getEmployees()) {
 	                if (employee.getId() == employeeId) {
 	                    employee.setSalary(newSalary);
+	                    notifyObservers();
 	                    System.out.println("Salary updated successfully");
 	                    return;
 	                }
@@ -64,5 +68,19 @@ public class FinanceManager extends Employee{
 	    @Override
 	    public int getId() {
 	        return super.id; 
+	    }
+
+	    public void attachObserver(viewFinanceManager observer) {
+	        observers.add(observer);
+	    }
+	    
+	    public void detachObserver(viewFinanceManager observer) {
+	        observers.remove(observer);
+	    }
+	    
+	    private void notifyObservers() {
+	        for (viewFinanceManager observer : observers) {
+	            observer.updateView();
+	        }
 	    }
 }
