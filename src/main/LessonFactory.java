@@ -36,7 +36,7 @@ public class LessonFactory implements Serializable{
 
     private static boolean saveToFile(String filePath, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(data);
+            writer.write("\n" + data);
             writer.newLine();
             return true;
         } catch (IOException e) {
