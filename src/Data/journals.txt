@@ -1,0 +1,4 @@
+--journalID--title--subs--theme--projects--
+
+1=InformationTechFans=0=CS=
+2=BiologyInModernWorld=0=Biology=

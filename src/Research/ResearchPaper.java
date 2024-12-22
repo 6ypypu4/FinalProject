@@ -1,5 +1,6 @@
 package Research;
 import java.util.*;
+import main.FileHandler;
 import java.text.SimpleDateFormat;
 import Enums.Format;
 
@@ -8,15 +9,13 @@ public class ResearchPaper {
 	private String DOI;
     private String title;
     private List<String> authors;
-    private Journal journal;
     private List<Page> pages;
     private Date date;
     private int citations;
 
-    public ResearchPaper(String title, List<String> authors, Journal journal, List<Page> pages, Date date, int citations, String DOI) {
+    public ResearchPaper(String title, List<String> authors, List<Page> pages, Date date, int citations, String DOI) {
         this.title = title;
         this.authors = new ArrayList<>(authors);
-        this.journal = journal;
         this.pages = new ArrayList<>(pages);
         this.date = date;
         this.citations = citations;
@@ -54,10 +53,10 @@ public class ResearchPaper {
     public String getCitation(Format format) {
         if (format == Format.PLAIN_TEXT) {
             return String.format("%s, %s, %s, pp. %d, %s, DOI: %s",
-                    String.join(", ", authors), title, journal, pages, formatDate(date), DOI);
+                    String.join(", ", authors), title, pages, formatDate(date), DOI);
         } else if (format == Format.BIBTEX) {
             return String.format("@article{%s,\n  title={%s},\n  author={%s},\n  journal={%s},\n  pages={%d},\n  year={%s},\n  doi={%s}\n}",
-                    DOI.replaceAll("[^a-zA-Z0-9]", ""), title, String.join(" and ", authors), journal, pages, formatYear(date), DOI);
+                    DOI.replaceAll("[^a-zA-Z0-9]", ""), title, String.join(" and ", authors), pages, formatYear(date), DOI);
         }
         return "";
     }
@@ -74,11 +73,15 @@ public class ResearchPaper {
         return sdf.format(date);
     }
 
-    // Override toString for printing
+    // Override toString for saving
     @Override
     public String toString() {
-        return String.format("Title: %s, Authors: %s, Journal: %s, Pages: %d, Date: %s, Citations: %d, DOI: %s",
-                title, String.join(", ", authors), journal, pages, formatDate(date), citations, DOI);
+        return DOI + "=" + 
+        		title + "=" + 
+        		authors + "=" +
+        		pages + "=" +
+        		date.toString() + "=" +
+        		citations;
     }
 
 	public String getDOI() {
@@ -105,14 +108,6 @@ public class ResearchPaper {
 		this.authors = authors;
 	}
 
-	public Journal getJournal() {
-		return journal;
-	}
-
-	public void setJournal(Journal journal) {
-		this.journal = journal;
-	}
-
 	public List<Page> getPages() {
 		return pages;
 	}
@@ -135,6 +130,10 @@ public class ResearchPaper {
 
 	public void setCitations(int citations) {
 		this.citations = citations;
+	}
+	
+	public void saveToFile() {
+		FileHandler.appendToFile("//FInalProject//src//Data//research_papers.txt", this.toString());
 	}
 }
 
