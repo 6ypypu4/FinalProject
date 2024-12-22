@@ -90,33 +90,25 @@ public class Intro {
     private void launchView(UserType userType) {
         System.out.println(messages.get("login_successful"));
         
-        switch (userType) {
-        case ADMIN -> {
+        if (userType == UserType.ADMIN) {
             viewAdmin view = new viewAdmin(id, languageChoice);
             view.start();
-        }
-        case MANAGER -> {
+        } else if (userType == UserType.MANAGER) {
             viewManager view = new viewManager(id, languageChoice);
             view.start();
-        }
-        case TEACHER -> {
+        } else if (userType == UserType.TEACHER) {
             viewTeacher view = new viewTeacher(id, languageChoice);
             view.start();
-        }
-        case STUDENT -> {
+        } else if (userType == UserType.STUDENT) {
             viewStudent view = new viewStudent(id, languageChoice);
             view.start();
-        }
-        case FINANCE_MANAGER -> {
+        } else if (userType == UserType.FINANCE_MANAGER) {
             viewFinanceManager view = new viewFinanceManager(id, languageChoice);
             view.start();
-        }
-        default -> {
+        } else {
             viewStudent view = new viewStudent(id, languageChoice);
             view.start();
         }
-    }
-
     }
 
 

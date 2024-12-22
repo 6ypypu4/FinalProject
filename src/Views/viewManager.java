@@ -215,18 +215,18 @@ public class viewManager extends viewEmployee {
     }
 
     private void createLesson() {
-        System.out.println("Enter course name:");
+        System.out.println(messages.get("enter_course_name") + ":");
         String courseName = scanner.nextLine();
         Course course = findCourseByName(courseName);
 
-        System.out.println("Enter date (format: DD/MM/YYYY):");
+        System.out.println(messages.get("enter_date") + ":");
         String date = scanner.nextLine();
 
-        System.out.println("Enter lesson type (1-Lecture, 2-Practice, 3-Lab):");
+        System.out.println(messages.get("enter_lesson_type") + ":");
         int lessonTypeId = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
-        System.out.println("Enter teacher id:");
+        System.out.println(messages.get("enter_teacher_id") + ":");
         String teacherName = scanner.nextLine();
         Teacher selectedTeacher = findTeacherByName(teacherName);
 

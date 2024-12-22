@@ -61,12 +61,10 @@ public class viewFinanceManager extends viewUser {
         while (running) {
             System.out.println("1. " + messages.get("view_budget"));
             System.out.println("2. " + messages.get("manage_salary"));
-            System.out.println("3. " + messages.get("view_expenses"));
-            System.out.println("4. " + messages.get("approve_expenses"));
-            System.out.println("5. " + messages.get("send_message"));
-            System.out.println("6. " + messages.get("view_messages")); 
-            System.out.println("7. " + messages.get("view_info"));
-            System.out.println("8. " + messages.get("exit"));
+            System.out.println("3. " + messages.get("send_message"));
+            System.out.println("4. " + messages.get("view_messages")); 
+            System.out.println("5. " + messages.get("view_info"));
+            System.out.println("6. " + messages.get("exit"));
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -76,16 +74,12 @@ public class viewFinanceManager extends viewUser {
             } else if (choice == 2) {
                 manageSalary();
             } else if (choice == 3) {
-                viewExpenses();
-            } else if (choice == 4) {
-                approveExpenses();
-            } else if (choice == 5) {
                 sendMessage();
-            } else if (choice == 6) {
+            } else if (choice == 4) {
                 viewMessages();
-            } else if (choice == 7) {
+            } else if (choice == 5) {
                 displayInfo();
-            } else if (choice == 8) {
+            } else if (choice == 6) {
                 running = false;
             } else {
                 System.out.println(messages.get("invalid_choice"));
@@ -103,16 +97,6 @@ public class viewFinanceManager extends viewUser {
         System.out.println(messages.get("enter_new_salary"));
         double newSalary = scanner.nextDouble();
         financeManager.manageSalary(employeeId, newSalary);
-    }
-
-    private void viewExpenses() {
-        financeManager.viewExpenses();
-    }
-
-    private void approveExpenses() {
-        System.out.println(messages.get("enter_expense_id"));
-        int expenseId = scanner.nextInt();
-        financeManager.approveExpense(expenseId);
     }
 
     private void sendMessage() {
