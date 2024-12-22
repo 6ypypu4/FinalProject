@@ -24,7 +24,7 @@ public class ResearchProjectFactory {
 	
 	private boolean saveProjectToFile(ResearchProject project) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter("//FInalProject//src//Data//projects.txt", true))) {
-			writer.write(project.toString());
+			writer.write("\n" + project.toString());
 			writer.newLine();
 			return true;
 		} catch(IOException e) {

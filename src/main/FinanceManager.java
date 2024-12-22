@@ -1,17 +1,20 @@
 package main;
 
+import Views.viewFinanceManager;
+
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinanceManager extends Employee{
 	
 	private Vector<FinanceOffice> offices;
-	private Vector<Expense> pendingExpenses;
 	private double budget;
+	private List<viewFinanceManager> observers = new ArrayList<>();
 	
 	public FinanceManager(int id, String name, String password, double salary) {
         super(id, name, password, salary);
         this.offices = new Vector<>();
-        this.pendingExpenses = new Vector<>();
         this.budget = 1000000; // Initial budget value - adjust as needed
     }
 	
@@ -55,6 +58,7 @@ public class FinanceManager extends Employee{
 	            for (Employee employee : office.getEmployees()) {
 	                if (employee.getId() == employeeId) {
 	                    employee.setSalary(newSalary);
+	                    notifyObservers();
 	                    System.out.println("Salary updated successfully");
 	                    return;
 	                }
@@ -63,33 +67,22 @@ public class FinanceManager extends Employee{
 	        System.out.println("Employee not found");
 	    }
 
-	    public void viewExpenses() {
-	        System.out.println("Pending Expenses:");
-	        for (Expense expense : pendingExpenses) {
-	            System.out.println("ID: " + expense.getId() + 
-	                             ", Amount: $" + expense.getAmount() + 
-	                             ", Description: " + expense.getDescription());
-	        }
-	    }
-
-	    public void approveExpense(int expenseId) {
-	        for (Expense expense : pendingExpenses) {
-	            if (expense.getId() == expenseId) {
-	                if (budget >= expense.getAmount()) {
-	                    budget -= expense.getAmount();
-	                    pendingExpenses.remove(expense);
-	                    System.out.println("Expense approved and processed");
-	                } else {
-	                    System.out.println("Insufficient budget to approve expense");
-	                }
-	                return;
-	            }
-	        }
-	        System.out.println("Expense not found");
-	    }
-
 	    @Override
 	    public int getId() {
 	        return super.id; 
+	    }
+
+	    public void attachObserver(viewFinanceManager observer) {
+	        observers.add(observer);
+	    }
+	    
+	    public void detachObserver(viewFinanceManager observer) {
+	        observers.remove(observer);
+	    }
+	    
+	    private void notifyObservers() {
+	        for (viewFinanceManager observer : observers) {
+	            observer.updateView();
+	        }
 	    }
 }

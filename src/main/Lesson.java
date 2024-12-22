@@ -20,12 +20,10 @@ public class Lesson {
         this.course = course;
     }
 
-
-
-
 	public LessonType getType() {
 		return type;
 	}
+	
 	public void setType(LessonType type) {
 		this.type = type;
 	}

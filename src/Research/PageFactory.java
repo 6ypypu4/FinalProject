@@ -21,7 +21,7 @@ public class PageFactory {
 	private boolean savePageToFile(Page page) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter("//FInalProject//src//Data//pages.txt", true))) {
 			String data = page.toString();
-			writer.write(data);
+			writer.write("\n" + data);
 			writer.newLine();
 			return true;
 		} catch(IOException e) {

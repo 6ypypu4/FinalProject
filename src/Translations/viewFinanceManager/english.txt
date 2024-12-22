@@ -1,0 +1,16 @@
+view_budget=View Budget
+manage_salary=Manage Salary
+view_expenses=View Expenses
+approve_expenses=Approve Expenses
+send_message=Send Message
+view_messages=View Messages
+view_info=View Information
+exit=Exit
+enter_choice=Enter your choice
+invalid_choice=Invalid choice
+enter_employee_id=Enter employee ID
+enter_new_salary=Enter new salary
+enter_expense_id=Enter expense ID
+enter_message=Enter message
+finance_manager_id=Finance Manager ID
+name=Name 
