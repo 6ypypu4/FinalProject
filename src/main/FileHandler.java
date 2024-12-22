@@ -7,6 +7,11 @@ import java.util.List;
 public class FileHandler {
     private static final String DATA_PATH = "src\\Data\\";
     
+
+    public FileHandler() {
+        // Constructor
+    }
+
     // Generic method to save objects
     public static <T> void saveToFile(List<T> objects, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(DATA_PATH + fileName))) {
@@ -19,7 +24,7 @@ public class FileHandler {
     // Generic method to append text to file
     public static boolean appendToFile(String fileName, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_PATH + fileName, true))) {
-            writer.write("\n" + data);
+            writer.write(data);
             writer.newLine();
             return true;
         } catch (IOException e) {
