@@ -34,7 +34,6 @@ public class viewStudent extends viewUser {
         boolean running = true;
 
         while (running) {
-            System.out.println("1. " + messages.get("view_grades"));
             System.out.println("2. " + messages.get("view_transcript"));
             System.out.println("3. " + messages.get("register_course"));
             System.out.println("4. " + messages.get("view_available_courses"));
@@ -49,7 +48,7 @@ public class viewStudent extends viewUser {
             scanner.nextLine(); // Clear the newline character
 
             if (choice == 1) {
-                student.viewGrades();
+                //notjing
             } else if (choice == 2) {
                 student.generateTranscript();
             } else if (choice == 3) {
@@ -116,14 +115,12 @@ public class viewStudent extends viewUser {
                 String[] parts = line.split("=");
                 if (parts.length >= 4) {
                     try {
-
-
                         int id = Integer.parseInt(parts[0].trim());
                         String name = parts[2].trim();
                         String password = parts[3].trim();
-
+                        String isOrgHead = parts[4].trim();
                         if (id == studentId) {
-                            student = new Student(id, name, password);
+                            student = new Student(id, name, password, isOrgHead);
                             return;
                         }
                     } catch (NumberFormatException e) {

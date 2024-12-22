@@ -91,7 +91,7 @@ public class viewTeacher extends viewEmployee {
     }
     
     private void viewMessages() {
-    	teacher.getMail();
+    	teacher.getWorkMessages();
     }
     
     private void putMarks() {
