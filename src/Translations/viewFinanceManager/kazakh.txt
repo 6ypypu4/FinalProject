@@ -1,0 +1,16 @@
+view_budget=Бюджетті қарау
+manage_salary=Жалақыны басқару
+view_expenses=Шығындарды қарау
+approve_expenses=Шығындарды бекіту
+send_message=Хабарлама жіберу
+view_messages=Хабарламаларды қарау
+view_info=Ақпаратты қарау
+exit=Шығу
+enter_choice=Таңдауыңызды енгізіңіз
+invalid_choice=Қате таңдау
+enter_employee_id=Қызметкер ID енгізіңіз
+enter_new_salary=Жаңа жалақыны енгізіңіз
+enter_expense_id=Шығын ID енгізіңіз
+enter_message=Хабарламаны енгізіңіз
+finance_manager_id=Қаржы менеджерінің ID
+name=Аты 

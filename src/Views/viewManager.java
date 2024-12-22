@@ -231,9 +231,9 @@ public class viewManager extends viewEmployee {
         Teacher selectedTeacher = findTeacherByName(teacherName);
 
         if (manager.createLesson(course, date, lessonTypeId, selectedTeacher)) {
-            System.out.println("Lesson created successfully!");
+            System.out.println(messages.get("lesson_created_success"));
         } else {
-            System.out.println("Failed to create lesson. Please check your inputs.");
+            System.out.println(messages.get("lesson_creation_failed"));
         }
     }
 

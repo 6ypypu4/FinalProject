@@ -1,0 +1,16 @@
+view_budget=Просмотр бюджета
+manage_salary=Управление зарплатами
+view_expenses=Просмотр расходов
+approve_expenses=Утверждение расходов
+send_message=Отправить сообщение
+view_messages=Просмотр сообщений
+view_info=Просмотр информации
+exit=Выход
+enter_choice=Введите ваш выбор
+invalid_choice=Неверный выбор
+enter_employee_id=Введите ID сотрудника
+enter_new_salary=Введите новую зарплату
+enter_expense_id=Введите ID расхода
+enter_message=Введите сообщение
+finance_manager_id=ID финансового менеджера
+name=Имя 
