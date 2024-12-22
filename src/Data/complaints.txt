@@ -1,2 +1,4 @@
 --studentId--UrgencyLevel--comment--
-1=MEDIUM=черт
+1=MEDIUM=мне поставили 5 баллов за аттестацию по ads
+
+
