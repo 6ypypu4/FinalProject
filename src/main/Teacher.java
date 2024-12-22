@@ -74,7 +74,6 @@ public class Teacher extends Employee {
         this.students = students;
     }
 
-    // Add this getter method
     public ArrayList<String> getLessons() {
         return lessons;
     }
