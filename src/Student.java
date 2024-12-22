@@ -2,6 +2,7 @@ import java.util.Vector;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Student extends User {
     private List<Course> registeredCourses;
@@ -56,7 +57,7 @@ public class Student extends User {
         if (courseGrades.isEmpty()) return 0.0;
         double GPA = 0;
         int totalCredits = 0;
-        for (var entry : courseGrades.entrySet()) {
+        for (Map.Entry<Course, Integer> entry : courseGrades.entrySet()) {
         	double gpaEquivalent = 0.00;
         	totalCredits += entry.getKey().getCredits();
         	if (95 <= entry.getValue()) {

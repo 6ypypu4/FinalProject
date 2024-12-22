@@ -121,7 +121,7 @@ public class viewFinanceManager extends viewUser {
     }
 
     private void viewMessages() {
-        financeManager.getMail();
+        financeManager.getWorkMessages();
     }
 
     @Override

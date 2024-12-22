@@ -1,3 +1,5 @@
+import Enums.CourseType;
+
 import java.util.Vector;
 
 public class Manager extends Employee{
@@ -12,7 +14,15 @@ public class Manager extends Employee{
 	}
 	
 	
-	public boolean createCourse(String courseId, String name, int courseTypeId, int credits, Vector<String> preRequisites) {
+	public boolean createCourse(String courseId, String name, CourseType courseType, int credits, Vector<String> preRequisites) {
+		int courseTypeId;
+		if(courseType == CourseType.MINOR){
+			courseTypeId = 1;
+		}else if( courseType == CourseType.MAJOR){
+			courseTypeId = 2;
+		}else {
+			courseTypeId = 3;
+		}
 		return courseFactory.createCourse(courseId, name, courseTypeId, credits, preRequisites);
 	}
 	

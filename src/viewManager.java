@@ -14,6 +14,8 @@ public class viewManager extends viewEmployee {
 
     private Vector<Course> courses = new Vector<>();
     private Vector<Lesson> lessons = new Vector<>();
+    private Vector<Teacher> teachers = new Vector<>();
+    private Vector<Student> students = new Vector<>();
 
     public viewManager(int managerId, int languageChoice) {
         this.managerId = managerId;
@@ -37,15 +39,27 @@ public class viewManager extends viewEmployee {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
-                if (parts.length == 5) {
+                if (parts.length >= 5) {
                     try {
                         int id = Integer.parseInt(parts[0].trim());
+                        String userType = parts[1].trim();
                         String name = parts[2].trim();
                         String password = parts[3].trim();
                         double salary = Double.parseDouble(parts[4].trim());
-                        if (id == managerId) {
-                            manager = new Manager(id, name, password, salary);
-                            return;
+                        
+                        switch (userType) {
+                            case "2":
+                                if (id == managerId) {
+                                    manager = new Manager(id, name, password, salary);
+                                }
+                                break;
+                            case "3":
+                                teachers.add(new Teacher(id, name, password, salary));
+                                break;
+                            case "4":
+                                String isOrg = parts.length > 5 ? parts[5].trim() : "0";
+                                students.add(new Student(id, name, password, isOrg));
+                                break;
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid number format in line: " + line);
@@ -54,9 +68,11 @@ public class viewManager extends viewEmployee {
                     System.out.println("Invalid format in line: " + line);
                 }
             }
-            System.out.println(messages.get("manager_not_found"));
+            if (manager == null) {
+                System.out.println(messages.get("manager_not_found"));
+            }
         } catch (IOException e) {
-            System.out.println("Error loading managers file: " + filename);
+            System.out.println("Error loading users file: " + filename);
         }
     }
 
@@ -70,9 +86,66 @@ public class viewManager extends viewEmployee {
         }
     }
 
+    protected void loadCoursesFromFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            // Skip header line
+            reader.readLine();
+            
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    String[] parts = line.split("=");
+                    if (parts.length >= 3) {
+                        String courseId = parts[0].trim();
+                        String name = parts[1].trim();
+                        int credits = Integer.parseInt(parts[2].trim());
+                        
+                        // Parse prerequisites
+                        Vector<String> preRequisites = new Vector<>();
+                        if (parts.length > 3 && parts[3].contains("->")) {
+                            String[] prereqs = parts[3].split("->");
+                            preRequisites.addAll(Arrays.asList(prereqs));
+                        }
+                        
+                        // Default to MAJOR if course type is not specified
+                        CourseType courseType = CourseType.MAJOR;
+                        courses.add(new Course(courseId, courseType, name, credits, preRequisites));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(messages.get("error_loading_courses") + ": " + filename);
+        }
+    }
+
+    protected void loadLessonsFromFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    String[] parts = line.split("=");
+                    if (parts.length >= 4) {
+                        Course course = findCourseByName(parts[0].trim());
+                        String date = parts[1].trim();
+                        LessonType lessonType = LessonType.valueOf(parts[2].trim().toUpperCase());
+                        Teacher teacher = findTeacherByName(parts[3].trim());
+                        
+                        if (course != null && teacher != null) {
+                            lessons.add(new Lesson(course, date, lessonType, teacher));
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(messages.get("error_loading_lessons") + ": " + filename);
+        }
+    }
+
     public void start() {
         loadMessages();
         createUserFromFile("src\\Data\\users.txt");
+        loadCoursesFromFile("src\\Data\\courses.txt");
+        loadLessonsFromFile("src\\Data\\lessons.txt");
         boolean running = true;
 
         while (running) {
@@ -110,7 +183,7 @@ public class viewManager extends viewEmployee {
         String name = scanner.nextLine();
 
         System.out.println(messages.get("select_course_type"));
-        int courseTypeId = selectCourseType();
+        CourseType courseType = selectCourseType();
 
         System.out.print(messages.get("enter_credits") + " ");
         int credits = scanner.nextInt();
@@ -120,9 +193,9 @@ public class viewManager extends viewEmployee {
         String prerequisitesInput = scanner.nextLine();
         Vector<String> preRequisites = new Vector<>(Arrays.asList(prerequisitesInput.split(",")));
 
-        boolean success = manager.createCourse(courseId, name, courseTypeId, credits, preRequisites);
+        boolean success = manager.createCourse(courseId, name, courseType, credits, preRequisites);
         if (success) {
-            courses.add(new Course(courseId, CourseType.values()[courseTypeId-1].toString(), name, credits, preRequisites));
+            courses.add(new Course(courseId, courseType, name, credits, preRequisites));
             System.out.println(messages.get("course_created"));
         } else {
             System.out.println(messages.get("course_creation_failed"));
@@ -141,11 +214,11 @@ public class viewManager extends viewEmployee {
         int lessonTypeId = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
-        System.out.println("Enter teacher name:");
+        System.out.println("Enter teacher id:");
         String teacherName = scanner.nextLine();
-        Teacher teacher = findTeacherByName(teacherName);
+        Teacher selectedTeacher = findTeacherByName(teacherName);
 
-        if (manager.createLesson(course, date, lessonTypeId, teacher)) {
+        if (manager.createLesson(course, date, lessonTypeId, selectedTeacher)) {
             System.out.println("Lesson created successfully!");
         } else {
             System.out.println("Failed to create lesson. Please check your inputs.");
@@ -174,7 +247,7 @@ public class viewManager extends viewEmployee {
         }
     }
 
-    private int selectCourseType() {
+    private CourseType selectCourseType() {
         while (true) {
             System.out.println("1. MAJOR");
             System.out.println("2. MINOR");
@@ -184,8 +257,12 @@ public class viewManager extends viewEmployee {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Clear input buffer
 
-            if (choice >= 1 && choice <= 3) {
-                return choice;
+            if (choice == 1) {
+                return CourseType.MAJOR;
+            }else if(choice == 2) {
+                return CourseType.MINOR;
+            }else if (choice == 3){
+                return CourseType.FREE_ELECTIVE;
             } else {
                 System.out.println(messages.get("invalid_choice"));
             }
@@ -202,8 +279,11 @@ public class viewManager extends viewEmployee {
     }
 
     private Teacher findTeacherByName(String teacherName) {
-        // Implement this method to find a teacher by name from your data source
-        // For now, we'll return null
+        for (Teacher teacher : teachers) {
+            if (teacher.getName().equalsIgnoreCase(teacherName)) {
+                return teacher;
+            }
+        }
         return null;
     }
 }
