@@ -54,11 +54,35 @@ public class Student extends User {
     private double calculateGPA() {
         // GPA calculation logic
         if (courseGrades.isEmpty()) return 0.0;
-        double total = 0;
-        for (Integer grade : courseGrades.values()) {
-            total += grade;
+        double GPA = 0;
+        int totalCredits = 0;
+        for (var entry : courseGrades.entrySet()) {
+        	double gpaEquivalent = 0.00;
+        	totalCredits += entry.getKey().getCredits();
+        	if (95 <= entry.getValue()) {
+        		gpaEquivalent = 4.00;
+        	} else if (90 <= entry.getValue()) {
+        		gpaEquivalent = 3.67;
+        	} else if (85 <= entry.getValue()) {
+        		gpaEquivalent = 3.33;
+        	} else if (80 <= entry.getValue()) {
+        		gpaEquivalent = 3.00;
+        	} else if (75 <= entry.getValue()) {
+        		gpaEquivalent = 2.67;
+        	} else if (70 <= entry.getValue()) {
+        		gpaEquivalent = 2.33;
+        	} else if (65 <= entry.getValue()) {
+        		gpaEquivalent = 2.00;
+        	} else if (60 <= entry.getValue()) {
+        		gpaEquivalent = 1.67;
+        	} else if (55 <= entry.getValue()) {
+        		gpaEquivalent = 1.33;
+        	} else if (50 <= entry.getValue()) {
+        		gpaEquivalent = 1;
+        	} 
+            GPA += entry.getKey().getCredits() * gpaEquivalent;
         }
-        return total / courseGrades.size();
+        return GPA / totalCredits;
     }
 
     // Teacher Feedback Methods
