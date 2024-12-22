@@ -1,5 +1,7 @@
 package main;
 
+import Views.viewFinanceManager;
+
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
