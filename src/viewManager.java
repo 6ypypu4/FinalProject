@@ -1,6 +1,8 @@
 import Enums.LessonType;
 import Enums.CourseType;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Vector;
 
@@ -126,18 +128,21 @@ public class viewManager extends viewEmployee {
                     String[] parts = line.split("=");
                     if (parts.length >= 4) {
                         Course course = findCourseByName(parts[0].trim());
-                        String date = parts[1].trim();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = formatter.parse(parts[1].trim());
                         LessonType lessonType = LessonType.valueOf(parts[2].trim().toUpperCase());
                         Teacher teacher = findTeacherByName(parts[3].trim());
                         
                         if (course != null && teacher != null) {
-                            lessons.add(new Lesson(course, date, lessonType, teacher));
+                            lessons.add(new Lesson(lessonType, date, teacher, course));
                         }
                     }
                 }
             }
         } catch (IOException e) {
             System.out.println(messages.get("error_loading_lessons") + ": " + filename);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 

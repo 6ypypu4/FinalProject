@@ -31,6 +31,7 @@ public class viewTeacher extends viewEmployee {
     public void start() {
         loadMessages();
         createUserFromFile("src\\Data\\users.txt");
+        loadTeacherData();
         boolean running = true;
 
         while (running) {
@@ -77,6 +78,7 @@ public class viewTeacher extends viewEmployee {
     private void sendComplaint() {
         System.out.println(messages.get("insert_student_id"));
         String studentId = scanner.nextLine();
+        scanner.nextLine();
         System.out.println(messages.get("insert_complain"));
         String complain = scanner.nextLine();
         teacher.sendComplaint(studentId, UrgencyLevel.MEDIUM, complain);
@@ -85,6 +87,7 @@ public class viewTeacher extends viewEmployee {
     private void sendMessage() {
         System.out.println(messages.get("insert_employee_id"));
         int employeeId = scanner.nextInt();
+        scanner.nextLine();
         System.out.println(messages.get("insert_message"));
         String message = scanner.nextLine();
         teacher.sendWorkMessage(employeeId, message);
@@ -164,6 +167,69 @@ public class viewTeacher extends viewEmployee {
             }
         } catch (IOException e) {
             System.out.println("Error loading users file: " + filename);
+        }
+    }
+
+    protected void loadTeacherData() {
+        loadTeacherCourses();
+        loadTeacherLessons();
+        loadTeacherStudents();
+    }
+
+    private void loadTeacherCourses() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Data\\teacher_courses.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("=");
+                if (parts.length == 2 && Integer.parseInt(parts[0]) == teacherId) {
+                    String[] courses = parts[1].split(",");
+                    for (String course : courses) {
+                        teacher.manageCourse(course, true);
+                    }
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading teacher courses: " + e.getMessage());
+        }
+    }
+
+    private void loadTeacherLessons() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Data\\teacher_lessons.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("=");
+                if (parts.length == 2 && Integer.parseInt(parts[0]) == teacherId) {
+                    String[] lessons = parts[1].split(",");
+                    for (String lesson : lessons) {
+                        teacher.getLessons().add(lesson);
+                    }
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading teacher lessons: " + e.getMessage());
+        }
+    }
+
+    private void loadTeacherStudents() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src\\Data\\teacher_students.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("=");
+                if (parts.length == 2 && Integer.parseInt(parts[0]) == teacherId) {
+                    String[] studentEntries = parts[1].split(",");
+                    HashMap<Integer, Integer> students = new HashMap<>();
+                    for (String entry : studentEntries) {
+                        String[] studentInfo = entry.split(":");
+                        students.put(Integer.parseInt(studentInfo[0]), Integer.parseInt(studentInfo[1]));
+                    }
+                    teacher.setStudents(students);
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading teacher students: " + e.getMessage());
         }
     }
 }
