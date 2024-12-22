@@ -6,18 +6,19 @@ public class Lesson {
 
     private LessonType type;
     private Date date;      
-    private String teacherId;
+    private Teacher teacher;
     private Vector<String> students;
     private Course course;
 
 
-    public Lesson(LessonType type, Date date, String teacher, Vector<String> students, Course course) {
+    public Lesson(LessonType type, Date date, Teacher teacher, Course course) {
         this.type = type;
         this.date = date;
-        this.teacherId = teacher;
-        this.students = students;
+        this.teacher = teacher;
         this.course = course;
     }
+
+
 
 
 	public LessonType getType() {
@@ -56,7 +57,7 @@ public class Lesson {
 	public String toString() {
 		return "Lesson [type=" + type 
 				+ ", date=" + date 
-				+ ", teacherId=" + teacherId 
+				+ ", teacher=" + teacher
 				+ ", students=" + students
 				+ ", course=" + course + "]";
 	}

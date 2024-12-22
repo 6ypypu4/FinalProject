@@ -8,7 +8,8 @@ import Enums.UrgencyLevel;
 public class Teacher extends Employee {
 
     private ArrayList<String> courses = new ArrayList<>();
-    private HashMap<Integer, String> students = new HashMap<>(); // studentId -> info
+    private ArrayList<String> lessons = new ArrayList<>();
+    private HashMap<Integer, Integer> students = new HashMap<>(); // studentId -> grade
 
     public Teacher(int id, String name, String password, double salary) {
         super(id, name, password, salary);
@@ -36,15 +37,14 @@ public class Teacher extends Employee {
     // View information about students
     public void viewStudents() {
         System.out.println("Students under teacher " + getName() + ":");
-        for (Map.Entry<Integer, String> entry : students.entrySet()) {
-            System.out.println("Student ID: " + entry.getKey() + ", Info: " + entry.getValue());
+        for (Map.Entry<Integer, Integer> entry : students.entrySet()) {
+            System.out.println("Student ID: " + entry.getKey() + ", Grade: " + entry.getValue());
         }
     }
 
     // Add or update student info // Нужен реворк
     public void manageStudentInfo(int studentId, String info) {
-        students.put(studentId, info);
-        System.out.println("Student information updated for ID " + studentId);
+        System.out.println("Student info updated for ID " + studentId + ": " + info);
     }
 
     // Put marks for a student // нужен реворк
@@ -64,4 +64,16 @@ public class Teacher extends Employee {
         System.out.println("Complaint filed: " + complaintText);
     }
 
+    public void setCourses(ArrayList<String> courses) {
+        this.courses = courses;
+    } 
+
+    public void setStudents(HashMap<Integer, Integer> students) {
+        this.students = students;
+    }
+
+    // Add this getter method
+    public ArrayList<String> getLessons() {
+        return lessons;
+    }
 }
