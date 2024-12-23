@@ -220,12 +220,20 @@ public class viewTeacher extends viewEmployee {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
-                if (parts.length == 2 && Integer.parseInt(parts[0]) == teacherId) {
-                    String[] studentEntries = parts[1].split(",");
+                if (parts.length == 2 && Integer.parseInt(parts[0].trim()) == teacherId) {
+                    String[] studentEntries = parts[1].trim().split(",");
                     HashMap<Integer, Integer> students = new HashMap<>();
                     for (String entry : studentEntries) {
-                        String[] studentInfo = entry.split(":");
-                        students.put(Integer.parseInt(studentInfo[0]), Integer.parseInt(studentInfo[1]));
+                        String[] studentInfo = entry.trim().split(":");
+                        if (studentInfo.length == 2) {
+                            try {
+                                int studentId = Integer.parseInt(studentInfo[0].trim());
+                                int grade = Integer.parseInt(studentInfo[1].trim());
+                                students.put(studentId, grade);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid number format in student entry: " + entry);
+                            }
+                        }
                     }
                     teacher.setStudents(students);
                     break;
